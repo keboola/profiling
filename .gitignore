@@ -34,7 +34,7 @@ logs
 .env.local
 .env.development.local
 .env.test.local
-.env.production.local 
-components/.DS_Store
-.DS_Store
+.env.production.local
+
+# Design system
 /keboola-design-system
