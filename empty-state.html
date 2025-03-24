@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Profiling - Keboola</title>
+    
+    <!-- Preload critical fonts for performance -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    
+    <!-- Required Dependencies -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="keboola-design-system/dist/design-system.css" rel="stylesheet">
+    
+    <!-- REQUIRED: Base font styles -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-family-base);
+            background-color: var(--neutral-grey-50);
+            color: var(--neutral-grey-800);
+            line-height: var(--body-body-line-height);
+        }
+    </style>
+</head>
+<body class="bg-grey-50">
+    <!-- Topbar Component -->
+    <nav class="topbar">
+        <!-- Header section with logo, project info, avatar and notifications -->
+        <div class="topbar__header">
+            <div class="topbar__container">
+                <!-- Left section with project and context -->
+                <div class="topbar__section-primary">
+                    <!-- Project selector -->
+                    <div class="topbar__branding">
+                        <img src="keboola-design-system/assets/logos/logo_navigation.svg" alt="Keboola Logo" class="topbar__logo">
+                        <div class="topbar__details">
+                            <p class="topbar__subtitle">Data Team</p>
+                            <p class="topbar__title">Keboola Analytics</p>
+                        </div>
+                        <div class="icon-container icon-small">
+                            <i class="fas fa-chevron-down icon-muted"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Context selector -->
+                    <div class="topbar__context">
+                        <span class="topbar__context-name">Production</span>
+                        <div class="icon-container icon-small">
+                            <i class="fas fa-chevron-down icon-muted"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right section with tools and user profile -->
+                <div class="topbar__section-secondary">
+                    <!-- Search -->
+                    <div class="text-input size-medium">
+                        <div class="content" style="min-height: 40px;">
+                            <i class="fas fa-search" style="color: var(--neutral-grey-400);"></i>
+                            <input type="text" placeholder="Search..." aria-label="Search columns and tables">
+                        </div>
+                    </div>
+                    
+                    <!-- Action Icons -->
+                    <div class="topbar__actions">
+                        <div class="icon-container icon-large topbar__action-item">
+                            <i class="fas fa-gift icon-muted"></i>
+                            <div class="topbar__indicator">5</div>
+                        </div>
+                        <div class="icon-container icon-large topbar__action-item">
+                            <i class="fas fa-trash icon-muted"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- User profile -->
+                    <div class="topbar__avatar">
+                        <img src="keboola-design-system/assets/avatars/placeholder.png" alt="User Avatar">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div class="container page-container" style="padding: var(--space-8) var(--space-16) var(--space-16) var(--space-16)">
+        <div class="content-wrapper" style="display: flex; flex-direction: column; gap: var(--space-4)">
+            <!-- Header with integrated breadcrumbs -->
+            <header class="header" style="height: auto; min-height: 40px;">
+                <div style="display: flex; flex-direction: column;">
+                    <!-- Breadcrumbs -->
+                    <div class="breadcrumbs" style="display: flex; align-items: center; margin-bottom: var(--space-1);">
+                        <div class="breadcrumbs__item">
+                            <a href="#" class="link-body" style="color: var(--neutral-grey-400);">Storage</a>
+                        </div>
+                        <div class="breadcrumbs__divider" style="margin: 0 var(--space-2);">
+                            <i class="fas fa-chevron-right icon-muted" style="font-size: 12px; color: var(--neutral-grey-400);"></i>
+                        </div>
+                        <div class="breadcrumbs__item">
+                            <a href="#" class="link-body" style="color: var(--neutral-grey-400);">keboola-ex-google-drive-73434</a>
+                        </div>
+                    </div>
+                    
+                    <h1 class="header__title heading-1" style="margin: 0;">
+                        <i class="fas fa-table icon-muted" style="margin-right: var(--space-2);"></i>
+                        Data Profiling Dashboard
+                    </h1>
+                </div>
+            </header>
+
+            <!-- Main Navigation Tabs -->
+            <div class="tabs tabs-large">
+                <div class="tab-item active">
+                    <div class="tab-content">
+                        <div class="tab-text body-text-medium">Table Overview</div>
+                    </div>
+                    <div class="tab-active-line"></div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-content">
+                        <div class="tab-text body-text-medium">Schema</div>
+                    </div>
+                    <div class="tab-active-line"></div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-content">
+                        <div class="tab-text body-text-medium">Profiling</div>
+                    </div>
+                    <div class="tab-active-line"></div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-content">
+                        <div class="tab-text body-text-medium">Events</div>
+                    </div>
+                    <div class="tab-active-line"></div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-content">
+                        <div class="tab-text body-text-medium">Snapshots</div>
+                    </div>
+                    <div class="tab-active-line"></div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-content">
+                        <div class="tab-text body-text-medium">Usage</div>
+                    </div>
+                    <div class="tab-active-line"></div>
+                </div>
+            </div>
+
+            <!-- Empty State Content -->
+            <div class="card bg-white" style="display: flex; flex-direction: column; align-items: center; padding: var(--space-16); text-align: center; gap: var(--space-6);">
+                <!-- Empty State Icon -->
+                <div style="width: 64px; height: 64px; background-color: var(--neutral-grey-100); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-chart-bar" style="font-size: 32px; color: var(--neutral-grey-400);"></i>
+                </div>
+
+                <!-- Empty State Title -->
+                <h2 class="heading-2" style="padding: 0;">Start Profiling Your Data</h2>
+
+                <!-- Empty State Description -->
+                <p class="body-text" style="color: var(--neutral-grey-600); max-width: 480px; margin: 0;">
+                    Select a table or upload a file to analyze data quality, completeness, and patterns across your datasets.
+                </p>
+
+                <!-- Action Button -->
+                <button class="btn btn-primary btn-medium">
+                    <div class="btn-icon">
+                        <i class="fas fa-play text-white"></i>
+                    </div>
+                    <span class="btn-text">START PROFILING</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to handle the transition to profiling page
+        function startProfiling() {
+            // Add loading state to the button
+            const button = document.querySelector('.btn-primary');
+            const originalContent = button.innerHTML;
+            button.innerHTML = `
+                <div class="btn-icon">
+                    <i class="fas fa-spinner fa-spin text-white"></i>
+                </div>
+                <span class="btn-text">PROFILING...</span>
+            `;
+            button.disabled = true;
+
+            // Simulate profiling process with a delay
+            setTimeout(() => {
+                // Redirect to profiling page with Table Overview tab active
+                window.location.href = 'profiling.html?view=table-overview';
+            }, 2000); // 2 second delay to simulate processing
+        }
+
+        // Add click event listener to the button
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.querySelector('.btn-primary');
+            if (button) {
+                button.addEventListener('click', startProfiling);
+            }
+        });
+    </script>
+</body>
+</html> 

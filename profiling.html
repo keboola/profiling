@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Profiling - Keboola</title>
+    
+    <!-- Preload critical fonts for performance -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    
+    <!-- Required Dependencies -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="keboola-design-system/dist/design-system.css" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- REQUIRED: Base font styles -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-family-base);
+            background-color: var(--neutral-grey-50);
+            color: var(--neutral-grey-800);
+            line-height: var(--body-body-line-height);
+        }
+        
+        /* Activity row styles */
+        .activity-row {
+            padding: var(--space-2);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .activity-row:hover {
+            background-color: var(--neutral-grey-100);
+        }
+        
+        .activity-row.active {
+            background-color: var(--secondary-blue-100);
+        }
+        
+        .activity-row.active .activity-row__text {
+            color: var(--secondary-blue-600);
+            font-weight: 400;
+        }
+        
+        .activity-row.active .fa-columns,
+        .activity-row.active .fa-table {
+            color: var(--secondary-blue-600) !important;
+        }
+    </style>
+</head>
+<body class="bg-grey-50">
+    <!-- Topbar Component -->
+    <nav class="topbar">
+        <!-- Header section with logo, project info, avatar and notifications -->
+        <div class="topbar__header">
+            <div class="topbar__container">
+                <!-- Left section with project and context -->
+                <div class="topbar__section-primary">
+                    <!-- Project selector -->
+                    <div class="topbar__branding">
+                        <img src="keboola-design-system/assets/logos/logo_navigation.svg" alt="Keboola Logo" class="topbar__logo">
+                        <div class="topbar__details">
+                            <p class="topbar__subtitle">Data Team</p>
+                            <p class="topbar__title">Keboola Analytics</p>
+                        </div>
+                        <div class="icon-container icon-small">
+                            <i class="fas fa-chevron-down icon-muted"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Context selector -->
+                    <div class="topbar__context">
+                        <span class="topbar__context-name">Production</span>
+                        <div class="icon-container icon-small">
+                            <i class="fas fa-chevron-down icon-muted"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right section with tools and user profile -->
+                <div class="topbar__section-secondary">
+                    <!-- Search -->
+                    <div class="text-input size-medium">
+                        <div class="content" style="min-height: 40px;">
+                            <i class="fas fa-search" style="color: var(--neutral-grey-400);"></i>
+                            <input type="text" placeholder="Search..." aria-label="Search columns and tables">
+                        </div>
+                    </div>
+                    
+                    <!-- Action Icons -->
+                    <div class="topbar__actions">
+                        <div class="icon-container icon-large topbar__action-item">
+                            <i class="fas fa-gift icon-muted"></i>
+                            <div class="topbar__indicator">5</div>
+                        </div>
+                        <div class="icon-container icon-large topbar__action-item">
+                            <i class="fas fa-trash icon-muted"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- User profile -->
+                    <div class="topbar__avatar">
+                        <img src="keboola-design-system/assets/avatars/placeholder.png" alt="User Avatar">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container - The topbar.css automatically adds margin-top via .topbar ~ .page-container selector -->
+    <div class="container page-container" style="padding: var(--space-8) var(--space-16) var(--space-16) var(--space-16)">
+        <div class="content-wrapper" style="display: flex; flex-direction: column; gap: var(--space-4)">
+            <!-- Breadcrumbs moved out of header -->
+            
+            <!-- Header with integrated breadcrumbs -->
+            <header class="header" style="height: auto; min-height: 40px;">
+                <div style="display: flex; flex-direction: column;">
+                    <!-- Breadcrumbs now in header -->
+                    <div class="breadcrumbs" style="display: flex; align-items: center; margin-bottom: var(--space-1);">
+                        <div class="breadcrumbs__item">
+                            <a href="#" class="link-body" style="color: var(--neutral-grey-400);">Storage</a>
+                        </div>
+                        <div class="breadcrumbs__divider" style="margin: 0 var(--space-2);">
+                            <i class="fas fa-chevron-right icon-muted" style="font-size: 12px; color: var(--neutral-grey-400);"></i>
+                        </div>
+                        <div class="breadcrumbs__item">
+                            <a href="#" class="link-body" style="color: var(--neutral-grey-400);">keboola-ex-google-drive-73434</a>
+                        </div>
+                    </div>
+                    
+                    <h1 class="header__title heading-1" style="margin: 0;">
+                        <i class="fas fa-table icon-muted" style="margin-right: var(--space-2);"></i>
+                        Data Profiling Dashboard
+                    </h1>
+                </div>
+                <div class="header__actions">
+                    <button class="btn btn-secondary btn-medium">
+                        <div class="btn-icon">
+                            <i class="fas fa-download icon-muted"></i>
+                        </div>
+                        <span class="btn-text button-text">EXPORT REPORT</span>
+                    </button>
+                    <button class="btn btn-primary btn-medium">
+                        <div class="btn-icon">
+                            <i class="fas fa-play text-white"></i>
+                        </div>
+                        <span class="btn-text button-text">RE-RUN PROFILING</span>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Main Navigation Tabs -->
+            <div class="tabs tabs-large">
+                <div class="tab-item">
+                    <div class="tab-content">
+                        <div class="tab-text body-text-medium">Overview</div>
+                    </div>
+                    <div class="tab-active-line"></div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-content">
+                        <div class="tab-text body-text-medium">Schema</div>
+                    </div>
+                    <div class="tab-active-line"></div>
+                </div>
+                <div class="tab-item active">
+                    <div class="tab-content">
+                        <div class="tab-text body-text-medium">Profiling</div>
+                    </div>
+                    <div class="tab-active-line"></div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-content">
+                        <div class="tab-text body-text-medium">Events</div>
+                    </div>
+                    <div class="tab-active-line"></div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-content">
+                        <div class="tab-text body-text-medium">Snapshots</div>
+                    </div>
+                    <div class="tab-active-line"></div>
+                </div>
+                <div class="tab-item">
+                    <div class="tab-content">
+                        <div class="tab-text body-text-medium">Usage</div>
+                    </div>
+                    <div class="tab-active-line"></div>
+                </div>
+            </div>
+            
+            <!-- Main Content with Sidebar -->
+            <section class="section">
+                <!-- Main Content Grid -->
+                <div class="content-layout" style="display: grid; grid-template-columns: 320px 1fr; gap: var(--space-4);">
+                    <!-- Left Sidebar (1/3) - Tables List -->
+                    <div class="card bg-white" style="padding: var(--space-2) var(--space-4) var(--space-4) var(--space-4);">
+                        <h2 class="card__title heading-4" style="margin-bottom: var(--space-1);">Table Structure</h2>
+                        <div class="card__content" style="padding: 0; display: flex; flex-direction: column; gap: var(--space-2);">
+                            
+                            <div style="display: flex; flex-direction: column; gap: 4px;">
+                                <!-- Table Overview (removed section title) -->
+                                <div class="activity-row" style="padding: var(--space-2); border-radius: 4px; cursor: pointer;" onclick="selectTableOverview(this)">
+                                    <div class="activity-row__content">
+                                        <div class="icon-container icon-small">
+                                            <i class="fas fa-table icon-muted"></i>
+                                        </div>
+                                        <span class="activity-row__text">Table Overview</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Columns section title -->
+                                <div style="margin: var(--space-1) 0; border-top: 1px solid var(--neutral-grey-200); padding-top: var(--space-3);">
+                                    <span class="small-body-text-medium" style="color: var(--neutral-grey-800); text-transform: uppercase;">Columns</span>
+                                </div>
+                                
+                                <!-- Search field moved below Columns divider -->
+                                <div class="text-input" style="width: 100%; margin-bottom: var(--space-2);">
+                                    <div class="content" style="min-height: 40px;">
+                                        <i class="fas fa-search" style="color: var(--neutral-grey-400);"></i>
+                                        <input type="text" placeholder="Search..." aria-label="Search columns">
+                                    </div>
+                                </div>
+                                
+                                <!-- Column items with consistent styling -->
+                                <div class="activity-row" style="padding: var(--space-2); border-radius: 4px; cursor: pointer;" onclick="selectColumn('user_id', 'Integer', this)">
+                                    <div class="activity-row__content">
+                                        <div class="icon-container icon-small">
+                                            <i class="fas fa-columns icon-muted"></i>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 4px;">
+                                            <span class="activity-row__text">user_id</span>
+                                            <div class="icon-container icon-small" title="Contains outliers">
+                                                <i class="fas fa-exclamation-triangle" style="color: var(--warning-orange-500-base);"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-row__meta">
+                                        <span>Integer</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-row" style="padding: var(--space-2); border-radius: 4px; cursor: pointer;" onclick="selectColumn('email', 'String', this)">
+                                    <div class="activity-row__content">
+                                        <div class="icon-container icon-small">
+                                            <i class="fas fa-columns icon-muted"></i>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 4px;">
+                                            <span class="activity-row__text">email</span>
+                                            <div class="icon-container icon-small" title="Contains missing values">
+                                                <i class="fas fa-exclamation-triangle" style="color: var(--warning-orange-500-base);"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-row__meta">
+                                        <span>String</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-row" style="padding: var(--space-2); border-radius: 4px; cursor: pointer;" onclick="selectColumn('name', 'String', this)">
+                                    <div class="activity-row__content">
+                                        <div class="icon-container icon-small">
+                                            <i class="fas fa-columns icon-muted"></i>
+                                        </div>
+                                        <span class="activity-row__text">name</span>
+                                    </div>
+                                    <div class="activity-row__meta">
+                                        <span>String</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-row" style="padding: var(--space-2); border-radius: 4px; cursor: pointer;" onclick="selectColumn('age', 'Integer', this)">
+                                    <div class="activity-row__content">
+                                        <div class="icon-container icon-small">
+                                            <i class="fas fa-columns icon-muted"></i>
+                                        </div>
+                                        <span class="activity-row__text">age</span>
+                                    </div>
+                                    <div class="activity-row__meta">
+                                        <span>Integer</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-row" style="padding: var(--space-2); border-radius: 4px; cursor: pointer;" onclick="selectColumn('signup_date', 'Date', this)">
+                                    <div class="activity-row__content">
+                                        <div class="icon-container icon-small">
+                                            <i class="fas fa-columns icon-muted"></i>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 4px;">
+                                            <span class="activity-row__text">signup_date</span>
+                                            <div class="icon-container icon-small" title="Contains missing values">
+                                                <i class="fas fa-exclamation-triangle" style="color: var(--warning-orange-500-base);"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-row__meta">
+                                        <span>Date</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-row" style="padding: var(--space-2); border-radius: 4px; cursor: pointer;" onclick="selectColumn('status', 'Boolean', this)">
+                                    <div class="activity-row__content">
+                                        <div class="icon-container icon-small">
+                                            <i class="fas fa-columns icon-muted"></i>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 4px;">
+                                            <span class="activity-row__text">status</span>
+                                            <div class="icon-container icon-small" title="Contains missing values">
+                                                <i class="fas fa-exclamation-triangle" style="color: var(--warning-orange-500-base);"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-row__meta">
+                                        <span>Boolean</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Content (2/3) - Data Summary and Quality -->
+                    <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+                        <!-- Column Title -->
+                        <h2 class="heading-2" id="column-title" style="padding-bottom: 0;">user_id</h2>
+                        
+                        <!-- Detected Issues Banner with Title -->
+                        <div class="banner style-variant-warning">
+                            <div class="icon-container icon-small">
+                                <i class="fas fa-exclamation-triangle icon-warning"></i>
+                            </div>
+                            <div class="content">
+                                <div class="title body-text-medium">Column Quality Issues</div>
+                                <div class="text body-text">Outliers in <strong>user_id</strong> column (5 values), missing values in multiple columns (563 records)</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Data Quality Widget -->
+                        <div class="card bg-white">
+                            <h2 class="card__title heading-4">Data Quality Metrics</h2>
+                            <div class="card__content">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);">
+                                    <!-- Left column metrics -->
+                                    <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                                        <div>
+                                            <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
+                                                <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Completeness</span>
+                                                <span>98.7%</span>
+                                            </div>
+                                            <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
+                                                <div style="height: 100%; width: 98.7%; background-color: var(--success-green-500-base); border-radius: 4px;"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
+                                                <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Validity</span>
+                                                <span>92.5%</span>
+                                            </div>
+                                            <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
+                                                <div style="height: 100%; width: 92.5%; background-color: var(--success-green-500-base); border-radius: 4px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Right column metrics -->
+                                    <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                                        <div>
+                                            <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
+                                                <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Consistency</span>
+                                                <span>94.2%</span>
+                                            </div>
+                                            <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
+                                                <div style="height: 100%; width: 94.2%; background-color: var(--success-green-500-base); border-radius: 4px;"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
+                                                <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Accuracy</span>
+                                                <span>87.3%</span>
+                                            </div>
+                                            <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
+                                                <div style="height: 100%; width: 87.3%; background-color: var(--warning-orange-500-base); border-radius: 4px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Properties -->
+                        <div class="card bg-white">
+                            <h2 class="card__title heading-4">Properties</h2>
+                            <div class="card__content">
+                                <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Column Type</span>
+                                        <span class="body-text-medium">Integer</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Distinct (n)</span>
+                                        <span class="body-text-medium">4347</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Duplicate Values</span>
+                                        <span class="body-text-medium">20</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Missing Values</span>
+                                        <span class="body-text-medium">563</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Sample Values Card -->
+                        <div class="card bg-white">
+                            <h2 class="card__title heading-4">Sample Values</h2>
+                            <div class="card__content">
+                                <span class="body-text-medium">24, 32, 27, 45, 36, 19, 27, 34, 52, 34</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Outliers Card -->
+                        <div class="card bg-white">
+                            <h2 class="card__title heading-4">Outliers</h2>
+                            <div class="card__content">
+                                <span class="body-text-medium">18, 62, 63, 64, 65</span>
+                            </div>
+                        </div>
+
+                        <!-- Statistics Card -->
+                        <div class="card bg-white">
+                            <h2 class="card__title heading-4">Statistics</h2>
+                            <div class="card__content">
+                                <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Mean</span>
+                                        <span class="body-text-medium">35</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Median</span>
+                                        <span class="body-text-medium">34</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Min</span>
+                                        <span class="body-text-medium">18</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Max</span>
+                                        <span class="body-text-medium">65</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Range & Frequency -->
+                        <div class="card">
+                            <div class="card__header">
+                                <span class="card__title">Range & Frequency</span>
+                            </div>
+                            <div class="card__content">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                                    <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Range</span>
+                                    <span class="body-text-medium">18-65</span>
+                                </div>
+                                <div style="height: 200px;">
+                                    <canvas id="frequencyChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Column data mapping (sample data for each column)
+        const columnData = {
+            'user_id': {
+                properties: {
+                    columnType: 'Integer',
+                    distinct: 12458,
+                    duplicates: 0,
+                    missing: 0
+                },
+                sampleValues: '10001, 10002, 10003, 10004, 10005, 10006, 10007, 10008, 10009, 10010',
+                outliers: '20455, 20456, 20457, 20458, 20459',
+                statistics: {
+                    mean: 15229,
+                    median: 15230,
+                    min: 10001,
+                    max: 20458
+                },
+                qualityMetrics: {
+                    completeness: 100.0,
+                    validity: 100.0,
+                    consistency: 100.0,
+                    accuracy: 100.0
+                },
+                rangeFrequency: {
+                    range: '10001-20458',
+                    chartData: [2491, 2492, 2491, 2492, 2492]
+                }
+            },
+            'email': {
+                properties: {
+                    columnType: 'String',
+                    distinct: 12245,
+                    duplicates: 213,
+                    missing: 124
+                },
+                sampleValues: 'john.doe@company.com, alice.smith@email.net, robert.jones@domain.org, sarah.wilson@mail.com',
+                outliers: 'n/a',
+                statistics: {
+                    mean: 'N/A',
+                    median: 'N/A',
+                    min: 'N/A',
+                    max: 'N/A'
+                },
+                qualityMetrics: {
+                    completeness: 99.0,
+                    validity: 98.2,
+                    consistency: 97.1,
+                    accuracy: 96.5
+                },
+                rangeFrequency: {
+                    range: 'N/A',
+                    chartData: [1224, 3674, 4898, 1837, 612]
+                }
+            },
+            'name': {
+                properties: {
+                    columnType: 'String',
+                    distinct: 11245,
+                    duplicates: 1213,
+                    missing: 89
+                },
+                sampleValues: 'John Smith, Alice Johnson, Robert Wilson, Sarah Davis, Michael Brown',
+                outliers: 'n/a',
+                statistics: {
+                    mean: 'N/A',
+                    median: 'N/A',
+                    min: 'N/A',
+                    max: 'N/A'
+                },
+                qualityMetrics: {
+                    completeness: 99.3,
+                    validity: 99.8,
+                    consistency: 94.2,
+                    accuracy: 95.6
+                },
+                rangeFrequency: {
+                    range: 'N/A',
+                    chartData: [2249, 3374, 4122, 1837, 787]
+                }
+            },
+            'age': {
+                properties: {
+                    columnType: 'Integer',
+                    distinct: 82,
+                    duplicates: 12376,
+                    missing: 156
+                },
+                sampleValues: '25, 31, 42, 28, 35, 47, 39, 33, 51, 29',
+                outliers: '14, 15, 92, 95, 97',
+                statistics: {
+                    mean: 38,
+                    median: 35,
+                    min: 14,
+                    max: 97
+                },
+                qualityMetrics: {
+                    completeness: 98.7,
+                    validity: 99.1,
+                    consistency: 95.8,
+                    accuracy: 94.7
+                },
+                rangeFrequency: {
+                    range: '14-97',
+                    chartData: [624, 4983, 4858, 1837, 156]
+                }
+            },
+            'signup_date': {
+                properties: {
+                    columnType: 'Date',
+                    distinct: 892,
+                    duplicates: 11566,
+                    missing: 279
+                },
+                sampleValues: '2024-02-15, 2024-02-14, 2024-02-13, 2024-02-12, 2024-02-11',
+                outliers: '2020-01-12, 2020-02-23',
+                statistics: {
+                    mean: '2022-08-15',
+                    median: '2023-06-23',
+                    min: '2020-01-12',
+                    max: '2024-02-15'
+                },
+                qualityMetrics: {
+                    completeness: 97.8,
+                    validity: 99.9,
+                    consistency: 93.2,
+                    accuracy: 96.1
+                },
+                rangeFrequency: {
+                    range: '2020-2024',
+                    chartData: [623, 1245, 2491, 3736, 4363]
+                }
+            },
+            'status': {
+                properties: {
+                    columnType: 'Boolean',
+                    distinct: 2,
+                    duplicates: 12456,
+                    missing: 53
+                },
+                sampleValues: 'true, false, true, true, false',
+                outliers: 'n/a',
+                statistics: {
+                    mean: '0.82 (82% true)',
+                    median: 'N/A',
+                    min: 'false',
+                    max: 'true'
+                },
+                qualityMetrics: {
+                    completeness: 99.6,
+                    validity: 100.0,
+                    consistency: 100.0,
+                    accuracy: 99.5
+                },
+                rangeFrequency: {
+                    range: 'Boolean',
+                    chartData: [82, 18, 0, 0, 0]
+                }
+            }
+        };
+
+        // Function to update content based on selected column
+        function selectColumn(columnName, columnType, element) {
+            // Update active status in column list
+            const allColumns = document.querySelectorAll('.activity-row');
+            allColumns.forEach(col => {
+                col.classList.remove('active');
+                
+                // Reset icon muted state
+                const icon = col.querySelector('.fas.fa-columns');
+                if (icon) {
+                    icon.classList.add('icon-muted');
+                }
+            });
+            
+            // Set active styles for selected column
+            element.classList.add('active');
+            
+            // Update column icon
+            const columnIcon = element.querySelector('.fas.fa-columns');
+            if (columnIcon) {
+                columnIcon.classList.remove('icon-muted');
+            }
+            
+            // Get column data
+            const data = columnData[columnName];
+            if (!data) return;
+            
+            // Restore the original column view if we're coming from table overview
+            const rightPanel = document.querySelector('.content-layout > div:last-child');
+            if (rightPanel) {
+                // Check if we're in table overview mode
+                const cards = rightPanel.querySelectorAll('.card');
+                if (cards.length > 0) {
+                    const firstCardTitle = cards[0].querySelector('.card__title');
+                    if (firstCardTitle && firstCardTitle.textContent === 'Data Summary') {
+                        // We need to restore the column view structure
+                        rightPanel.innerHTML = `
+                            <h2 class="heading-2" id="column-title" style="padding-bottom: 0;">${columnName}</h2>
+                            
+                            <div class="banner style-variant-warning">
+                                <div class="icon-container icon-small">
+                                    <i class="fas fa-exclamation-triangle icon-warning"></i>
+                                </div>
+                                <div class="content">
+                                    <div class="title body-text-medium">Column Quality Issues</div>
+                                    <div class="text body-text"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="card bg-white">
+                                <h2 class="card__title heading-4">Data Quality Metrics</h2>
+                                <div class="card__content">
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);">
+                                        <!-- Left column metrics -->
+                                        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                                            <div>
+                                                <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
+                                                    <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Completeness</span>
+                                                    <span>98.7%</span>
+                                                </div>
+                                                <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
+                                                    <div style="height: 100%; width: 98.7%; background-color: var(--success-green-500-base); border-radius: 4px;"></div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div>
+                                                <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
+                                                    <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Validity</span>
+                                                    <span>92.5%</span>
+                                                </div>
+                                                <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
+                                                    <div style="height: 100%; width: 92.5%; background-color: var(--success-green-500-base); border-radius: 4px;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Right column metrics -->
+                                        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                                            <div>
+                                                <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
+                                                    <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Consistency</span>
+                                                    <span>94.2%</span>
+                                                </div>
+                                                <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
+                                                    <div style="height: 100%; width: 94.2%; background-color: var(--success-green-500-base); border-radius: 4px;"></div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div>
+                                                <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
+                                                    <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Accuracy</span>
+                                                    <span>87.3%</span>
+                                                </div>
+                                                <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
+                                                    <div style="height: 100%; width: 87.3%; background-color: var(--warning-orange-500-base); border-radius: 4px;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card bg-white">
+                                <h2 class="card__title heading-4">Properties</h2>
+                                <div class="card__content"></div>
+                            </div>
+                            
+                            <div class="card bg-white">
+                                <h2 class="card__title heading-4">Sample Values</h2>
+                                <div class="card__content"></div>
+                            </div>
+                            
+                            <div class="card bg-white">
+                                <h2 class="card__title heading-4">Outliers</h2>
+                                <div class="card__content"></div>
+                            </div>
+
+                            <div class="card bg-white">
+                                <h2 class="card__title heading-4">Statistics</h2>
+                                <div class="card__content"></div>
+                            </div>
+                            
+                            <div class="card">
+                                <div class="card__header">
+                                    <span class="card__title">Range & Frequency</span>
+                                </div>
+                                <div class="card__content">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Range</span>
+                                        <span class="body-text-medium">18-65</span>
+                                    </div>
+                                    <div style="height: 200px;">
+                                        <canvas id="frequencyChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+            }
+            
+            // Update banner content with column name
+            const bannerTitleElement = document.querySelector('.banner .title');
+            const bannerTextElement = document.querySelector('.banner .text');
+            
+            if (bannerTitleElement && bannerTextElement) {
+                // Check if the selected column has a warning icon
+                const selectedColumn = document.querySelector('.activity-row.active');
+                const hasWarningIcon = selectedColumn && selectedColumn.querySelector('.fa-exclamation-triangle');
+                
+                if (hasWarningIcon) {
+                    bannerTitleElement.textContent = 'Column Quality Issues';
+                    
+                    // Create appropriate warning message based on column data
+                    let warningMessage = '';
+                    
+                    // Check for outliers
+                    if (data.outliers && data.outliers !== 'n/a') {
+                        const outliersList = data.outliers.split(',');
+                        warningMessage += `${outliersList.length} outliers found`;
+                    }
+                    
+                    // Check for missing values
+                    if (data.properties.missing > 0) {
+                        if (warningMessage) {
+                            warningMessage += ', ';
+                        }
+                        warningMessage += `${data.properties.missing} missing values`;
+                    }
+                    
+                    bannerTextElement.innerHTML = warningMessage;
+                    
+                    // Show the banner
+                    const bannerElement = document.querySelector('.banner');
+                    if (bannerElement) {
+                        bannerElement.style.display = '';
+                    }
+                } else {
+                    // Hide the banner if no warning icon
+                    const bannerElement = document.querySelector('.banner');
+                    if (bannerElement) {
+                        bannerElement.style.display = 'none';
+                    }
+                }
+            }
+            
+            // Update column title at the top of the right panel
+            const columnTitleElement = document.getElementById('column-title');
+            if (columnTitleElement) {
+                columnTitleElement.textContent = columnName;
+            }
+            
+            // Use helper function to find and update elements
+            function updateCardContent(cardTitleText, newContent) {
+                const cardTitles = document.querySelectorAll('.card__title');
+                for (let i = 0; i < cardTitles.length; i++) {
+                    if (cardTitles[i].textContent.trim() === cardTitleText) {
+                        const contentEl = cardTitles[i].closest('.card').querySelector('.card__content');
+                        if (contentEl) {
+                            contentEl.innerHTML = newContent;
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+            
+            // Update Properties card
+            updateCardContent('Properties', `
+                <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Column Type</span>
+                        <span class="body-text-medium">${data.properties.columnType}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Distinct (n)</span>
+                        <span class="body-text-medium">${data.properties.distinct}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Duplicate Values</span>
+                        <span class="body-text-medium">${data.properties.duplicates}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Missing Values</span>
+                        <span class="body-text-medium">${data.properties.missing}</span>
+                    </div>
+                </div>
+            `);
+            
+            // Update Sample Values card
+            updateCardContent('Sample Values', `
+                <span class="body-text-medium">${data.sampleValues}</span>
+            `);
+            
+            // Update Outliers card
+            updateCardContent('Outliers', `
+                <span class="body-text-medium">${data.outliers}</span>
+            `);
+            
+            // Update Statistics card
+            updateCardContent('Statistics', `
+                <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Mean</span>
+                        <span class="body-text-medium">${data.statistics.mean}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Median</span>
+                        <span class="body-text-medium">${data.statistics.median}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Min</span>
+                        <span class="body-text-medium">${data.statistics.min}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Max</span>
+                        <span class="body-text-medium">${data.statistics.max}</span>
+                    </div>
+                </div>
+            `);
+            
+            // Update Quality Metrics
+            updateQualityMetrics(data.qualityMetrics);
+            
+            // Update Range & Frequency
+            const rangeFrequencyCards = document.querySelectorAll('.card__title');
+            for (let i = 0; i < rangeFrequencyCards.length; i++) {
+                if (rangeFrequencyCards[i].textContent.trim() === 'Range & Frequency') {
+                    const contentEl = rangeFrequencyCards[i].closest('.card').querySelector('.card__content');
+                    if (contentEl) {
+                        const firstDiv = contentEl.querySelector('div:first-child');
+                        if (firstDiv) {
+                            firstDiv.innerHTML = `
+                                <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Range</span>
+                                <span class="body-text-medium">${data.rangeFrequency.range}</span>
+                            `;
+                        }
+                    }
+                    break;
+                }
+            }
+            
+            // Update chart
+            updateFrequencyChart(columnName, data.rangeFrequency.chartData);
+            
+            // Update URL with column parameter to enable bookmarking and sharing
+            const url = new URL(window.location.href);
+            url.searchParams.set('column', columnName);
+            history.pushState({column: columnName}, '', url);
+        }
+        
+        // Helper function to update quality metrics
+        function updateQualityMetrics(metrics) {
+            // Find the Data Quality Metrics card
+            const cardTitles = document.querySelectorAll('.card__title');
+            let qualityMetricsCard = null;
+            
+            for (let i = 0; i < cardTitles.length; i++) {
+                if (cardTitles[i].textContent.trim() === 'Data Quality Metrics') {
+                    qualityMetricsCard = cardTitles[i].closest('.card');
+                    break;
+                }
+            }
+            
+            if (!qualityMetricsCard) return;
+            
+            // Get the grid container for metrics
+            const gridContainer = qualityMetricsCard.querySelector('.card__content > div');
+            if (!gridContainer) return;
+            
+            // Get the left and right columns
+            const columns = gridContainer.querySelectorAll('div');
+            if (columns.length < 2) return;
+            
+            // Update Completeness (first metric in left column)
+            const completenessContainer = columns[0].querySelector('div:first-child');
+            if (completenessContainer) {
+                const completenessLabel = completenessContainer.querySelector('.body-text-medium');
+                if (completenessLabel) {
+                    completenessLabel.innerHTML = `
+                        <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Completeness</span>
+                        <span>${metrics.completeness}%</span>
+                    `;
+                    
+                    const progressBarContainer = completenessContainer.querySelector('div:last-child');
+                    if (progressBarContainer) {
+                        const progressBar = progressBarContainer.querySelector('div');
+                        if (progressBar) {
+                            progressBar.style.width = `${metrics.completeness}%`;
+                            progressBar.style.backgroundColor = metrics.completeness < 90 ? 
+                                'var(--warning-orange-500-base)' : 'var(--success-green-500-base)';
+                        }
+                    }
+                }
+            }
+            
+            // Update Validity (second metric in left column)
+            const validityContainer = columns[0].querySelector('div:nth-child(2)');
+            if (validityContainer) {
+                const validityLabel = validityContainer.querySelector('.body-text-medium');
+                if (validityLabel) {
+                    validityLabel.innerHTML = `
+                        <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Validity</span>
+                        <span>${metrics.validity}%</span>
+                    `;
+                    
+                    const progressBarContainer = validityContainer.querySelector('div:last-child');
+                    if (progressBarContainer) {
+                        const progressBar = progressBarContainer.querySelector('div');
+                        if (progressBar) {
+                            progressBar.style.width = `${metrics.validity}%`;
+                            progressBar.style.backgroundColor = metrics.validity < 90 ? 
+                                'var(--warning-orange-500-base)' : 'var(--success-green-500-base)';
+                        }
+                    }
+                }
+            }
+            
+            // Update Consistency (first metric in right column)
+            const consistencyContainer = columns[1].querySelector('div:first-child');
+            if (consistencyContainer) {
+                const consistencyLabel = consistencyContainer.querySelector('.body-text-medium');
+                if (consistencyLabel) {
+                    consistencyLabel.innerHTML = `
+                        <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Consistency</span>
+                        <span>${metrics.consistency}%</span>
+                    `;
+                    
+                    const progressBarContainer = consistencyContainer.querySelector('div:last-child');
+                    if (progressBarContainer) {
+                        const progressBar = progressBarContainer.querySelector('div');
+                        if (progressBar) {
+                            progressBar.style.width = `${metrics.consistency}%`;
+                            progressBar.style.backgroundColor = metrics.consistency < 90 ? 
+                                'var(--warning-orange-500-base)' : 'var(--success-green-500-base)';
+                        }
+                    }
+                }
+            }
+            
+            // Update Accuracy (second metric in right column)
+            const accuracyContainer = columns[1].querySelector('div:nth-child(2)');
+            if (accuracyContainer) {
+                const accuracyLabel = accuracyContainer.querySelector('.body-text-medium');
+                if (accuracyLabel) {
+                    accuracyLabel.innerHTML = `
+                        <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Accuracy</span>
+                        <span>${metrics.accuracy}%</span>
+                    `;
+                    
+                    const progressBarContainer = accuracyContainer.querySelector('div:last-child');
+                    if (progressBarContainer) {
+                        const progressBar = progressBarContainer.querySelector('div');
+                        if (progressBar) {
+                            progressBar.style.width = `${metrics.accuracy}%`;
+                            progressBar.style.backgroundColor = metrics.accuracy < 90 ? 
+                                'var(--warning-orange-500-base)' : 'var(--success-green-500-base)';
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Update the frequency chart
+        function updateFrequencyChart(columnName, chartData) {
+            const frequencyChartCanvas = document.getElementById('frequencyChart');
+            if (!frequencyChartCanvas) return;
+            
+            // Define labels based on column type
+            let labels;
+            if (columnName === 'status') {
+                labels = ['true', 'false'];
+            } else if (columnName === 'signup_date') {
+                labels = ['2010-2015', '2016-2018', '2019-2020', '2021-2022', '2023'];
+            } else if (columnName === 'age') {
+                labels = ['<20', '20-35', '36-50', '51-65', '>65'];
+            } else if (columnName === 'user_id') {
+                labels = ['10-25', '26-35', '36-45', '46-55', '56-65'];
+            } else if (columnName === 'email' || columnName === 'name') {
+                labels = ['Length ≤10', '10<Length≤20', '20<Length≤30', '30<Length≤40', 'Length>40'];
+            } else {
+                labels = ['Cat 1', 'Cat 2', 'Cat 3', 'Cat 4', 'Cat 5'];
+            }
+            
+            // Destroy existing chart if it exists
+            const existingChart = Chart.getChart(frequencyChartCanvas);
+            if (existingChart) {
+                existingChart.destroy();
+            }
+            
+            // Create new chart
+            new Chart(frequencyChartCanvas, {
+                type: columnName === 'signup_date' ? 'bar' : 'bar',
+                data: {
+                    labels: labels,
+                    datasets: columnName === 'signup_date' ? [
+                        {
+                            data: chartData,
+                            backgroundColor: 'rgba(145, 107, 233, 0.2)',
+                            borderColor: 'rgb(145, 107, 233)',
+                            borderWidth: 1,
+                            barThickness: 15
+                        },
+                        {
+                            type: 'line',
+                            data: chartData,
+                            borderColor: 'rgb(145, 107, 233)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgb(145, 107, 233)',
+                            pointRadius: 4,
+                            tension: 0.3,
+                            fill: false
+                        }
+                    ] : columnName === 'email' || columnName === 'name' ? [{
+                        data: chartData,
+                        backgroundColor: 'rgba(75, 210, 110, 0.8)',
+                        borderColor: 'rgb(75, 210, 110)',
+                        borderWidth: 1,
+                        barThickness: 15
+                    }] : columnName === 'user_id' || columnName === 'age' ? [{
+                        data: chartData,
+                        backgroundColor: 'rgba(31, 143, 255, 0.8)',
+                        borderColor: 'rgb(31, 143, 255)',
+                        borderWidth: 1,
+                        barThickness: 15
+                    }] : [{
+                        data: chartData,
+                        backgroundColor: 'rgba(255, 145, 15, 0.8)',
+                        borderColor: 'rgb(255, 145, 15)',
+                        borderWidth: 1,
+                        barThickness: 15
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw + ' occurrences';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(217, 221, 229, 0.5)'
+                            },
+                            ticks: {
+                                stepSize: 20
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Function to display table overview
+        function selectTableOverview(element) {
+            // Update active status in column list
+            const allColumns = document.querySelectorAll('.activity-row');
+            allColumns.forEach(col => {
+                col.classList.remove('active');
+                
+                // Reset icon muted state
+                const icon = col.querySelector('.fas.fa-columns');
+                if (icon) {
+                    icon.classList.add('icon-muted');
+                }
+            });
+            
+            // Set active styles for selected element
+            element.classList.add('active');
+            
+            // Update icon appearance
+            const tableIcon = element.querySelector('.fas.fa-table');
+            if (tableIcon) {
+                tableIcon.classList.remove('icon-muted');
+            }
+            
+            // Update column title at the top of the right panel
+            const columnTitleElement = document.getElementById('column-title');
+            if (columnTitleElement) {
+                columnTitleElement.textContent = 'Table Overview';
+            }
+            
+            // Remove the warning banner when viewing table overview
+            const bannerElement = document.querySelector('.banner');
+            if (bannerElement) {
+                bannerElement.style.display = 'none';
+            }
+            
+            // Create and display overview cards
+            const rightPanel = document.querySelector('.content-layout > div:last-child');
+            if (rightPanel) {
+                // Save the original column title
+                const originalTitle = rightPanel.querySelector('#column-title');
+                const titleHtml = originalTitle ? originalTitle.outerHTML : '<h2 class="heading-2" id="column-title" style="padding-bottom: 0;">Table Overview</h2>';
+                
+                // Create overview content with multiple cards
+                rightPanel.innerHTML = `
+                    ${titleHtml}
+                    
+                    <!-- Data Overview Card -->
+                    <div class="card bg-white">
+                        <h2 class="card__title heading-4">Data Summary</h2>
+                        <div class="card__content">
+                            <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                    <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Number of Columns</span>
+                                    <span class="body-text-medium">6</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                    <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Number of Rows</span>
+                                    <span class="body-text-medium">12,458</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                    <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Data Size</span>
+                                    <span class="body-text-medium">4.8 MB</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quality Metrics Overview -->
+                    <div class="card bg-white">
+                        <h2 class="card__title heading-4">Average Quality Metrics</h2>
+                        <div class="card__content">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);">
+                                <!-- Left column metrics -->
+                                <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                                    <div>
+                                        <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
+                                            <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Completeness</span>
+                                            <span>94.8%</span>
+                                        </div>
+                                        <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
+                                            <div style="height: 100%; width: 94.8%; background-color: var(--success-green-500-base); border-radius: 4px;"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
+                                            <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Validity</span>
+                                            <span>91.2%</span>
+                                        </div>
+                                        <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
+                                            <div style="height: 100%; width: 91.2%; background-color: var(--success-green-500-base); border-radius: 4px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Right column metrics -->
+                                <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                                    <div>
+                                        <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
+                                            <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Consistency</span>
+                                            <span>88.5%</span>
+                                        </div>
+                                        <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
+                                            <div style="height: 100%; width: 88.5%; background-color: var(--warning-orange-500-base); border-radius: 4px;"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
+                                            <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Accuracy</span>
+                                            <span>86.7%</span>
+                                        </div>
+                                        <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
+                                            <div style="height: 100%; width: 86.7%; background-color: var(--warning-orange-500-base); border-radius: 4px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Quality Overview -->
+                    <div class="card bg-white">
+                        <h2 class="card__title heading-4">Data Quality Overview</h2>
+                        <div class="card__content">
+                            <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                    <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Number of Nulls</span>
+                                    <span class="body-text-medium">648 (5.2%)</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                    <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Number of Duplicates</span>
+                                    <span class="body-text-medium">1,245 (10%)</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                    <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Number of Variable Types</span>
+                                    <span class="body-text-medium">4</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column Type Distribution -->
+                    <div class="card bg-white">
+                        <h2 class="card__title heading-4">Column Type Distribution</h2>
+                        <div class="card__content">
+                            <div class="grid grid-cols-2" style="gap: var(--space-4)">
+                                <!-- String Type -->
+                                <div class="overview-card overview-card--grey">
+                                    <div class="overview-card__header">
+                                        <span class="overview-card__title">String</span>
+                                    </div>
+                                    <div class="overview-card__value">2</div>
+                                    <div class="overview-card__subtitle">33% of columns</div>
+                                    <div style="margin-top: var(--space-2);">
+                                        <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
+                                            <div style="height: 100%; width: 33%; background-color: var(--success-green-500-base); border-radius: 4px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Integer Type -->
+                                <div class="overview-card overview-card--grey">
+                                    <div class="overview-card__header">
+                                        <span class="overview-card__title">Integer</span>
+                                    </div>
+                                    <div class="overview-card__value">2</div>
+                                    <div class="overview-card__subtitle">33% of columns</div>
+                                    <div style="margin-top: var(--space-2);">
+                                        <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
+                                            <div style="height: 100%; width: 33%; background-color: var(--secondary-blue-500-base); border-radius: 4px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Date Type -->
+                                <div class="overview-card overview-card--grey">
+                                    <div class="overview-card__header">
+                                        <span class="overview-card__title">Date</span>
+                                    </div>
+                                    <div class="overview-card__value">1</div>
+                                    <div class="overview-card__subtitle">17% of columns</div>
+                                    <div style="margin-top: var(--space-2);">
+                                        <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
+                                            <div style="height: 100%; width: 17%; background-color: rgb(145, 107, 233); border-radius: 4px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Boolean Type -->
+                                <div class="overview-card overview-card--grey">
+                                    <div class="overview-card__header">
+                                        <span class="overview-card__title">Boolean</span>
+                                    </div>
+                                    <div class="overview-card__value">1</div>
+                                    <div class="overview-card__subtitle">17% of columns</div>
+                                    <div style="margin-top: var(--space-2);">
+                                        <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
+                                            <div style="height: 100%; width: 17%; background-color: var(--warning-orange-500-base); border-radius: 4px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Profiling Metadata -->
+                    <div class="card bg-white">
+                        <h2 class="card__title heading-4">Profiling Metadata</h2>
+                        <div class="card__content">
+                            <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                    <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Last Profiled</span>
+                                    <span class="body-text-medium">Feb 12 16:29</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                    <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Profiled by</span>
+                                    <div style="display: flex; align-items: center; gap: var(--space-2);">
+                                        <div style="width: 24px; height: 24px; border-radius: 50%; background-color: var(--secondary-blue-600); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px;">T</div>
+                                        <span class="body-text-medium">Tomáš Janoušek</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Update URL with tableOverview parameter to enable bookmarking and sharing
+            const url = new URL(window.location.href);
+            url.searchParams.delete('column');
+            url.searchParams.set('view', 'table-overview');
+            history.pushState({view: 'table-overview'}, '', url);
+        }
+        
+        // On DOMContentLoaded event handler
+        document.addEventListener('DOMContentLoaded', function() {
+            // Helper function for querySelector with contains
+            Element.prototype.contains = function(text) {
+                return (this.textContent || this.innerText).indexOf(text) > -1;
+            };
+            
+            // Initialize frequency chart for the first time
+            updateFrequencyChart('user_id', columnData['user_id'].rangeFrequency.chartData);
+            
+            // Check URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const viewParam = urlParams.get('view');
+            const columnParam = urlParams.get('column');
+            
+            if (viewParam === 'table-overview') {
+                // Find and select the table overview element
+                const tableOverviewElement = document.querySelector('.activity-row:first-child');
+                if (tableOverviewElement) {
+                    selectTableOverview(tableOverviewElement);
+                }
+            } else if (columnParam && columnData[columnParam]) {
+                // Find column element
+                let targetElement = null;
+                
+                document.querySelectorAll('.activity-row').forEach(element => {
+                    const columnNameElement = element.querySelector('.activity-row__text');
+                    if (columnNameElement && columnNameElement.textContent === columnParam) {
+                        targetElement = element;
+                    }
+                });
+                
+                if (targetElement) {
+                    // Get column type
+                    const columnTypeElement = targetElement.querySelector('.activity-row__meta span');
+                    const columnType = columnTypeElement ? columnTypeElement.textContent : '';
+                    
+                    // Select column
+                    selectColumn(columnParam, columnType, targetElement);
+                } else {
+                    // Default to user_id if column not found
+                    selectDefaultColumn();
+                }
+            } else {
+                // If no parameters specified, default to table overview
+                const tableOverviewElement = document.querySelector('.activity-row:first-child');
+                if (tableOverviewElement) {
+                    selectTableOverview(tableOverviewElement);
+                }
+            }
+            
+            // Function to select default column (user_id)
+            function selectDefaultColumn() {
+                let targetElement = null;
+                
+                document.querySelectorAll('.activity-row').forEach(element => {
+                    const columnNameElement = element.querySelector('.activity-row__text');
+                    if (columnNameElement && columnNameElement.textContent === 'user_id') {
+                        targetElement = element;
+                        
+                        // Skip the Table Overview element
+                        const tableIcon = element.querySelector('.fas.fa-table');
+                        if (tableIcon) return;
+                        
+                        const columnTypeElement = element.querySelector('.activity-row__meta span');
+                        const columnType = columnTypeElement ? columnTypeElement.textContent : '';
+                        
+                        selectColumn('user_id', columnType, element);
+                    }
+                });
+            }
+            
+            // Handle tab switching for main navigation tabs
+            const mainTabItems = document.querySelectorAll('.content-wrapper > .tabs .tab-item');
+            
+            mainTabItems.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    mainTabItems.forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
