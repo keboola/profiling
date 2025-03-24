@@ -25,7 +25,7 @@ MVP interface for data profiling and quality analysis.
 ## Getting Started
 
 1. Clone the repository
-2. Add the keboola-design-system to this folder (download from https://github.com/keboola/keboola-design-system)
+2. Add keboola-design-system to this project (download from https://github.com/keboola/keboola-design-system)
 3. Open `empty-state.html` to start profiling
 4. Click "START PROFILING" to begin analysis
 5. Navigate between tables and columns using the sidebar
