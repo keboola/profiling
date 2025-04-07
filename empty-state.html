@@ -23,6 +23,26 @@
             color: var(--neutral-grey-800);
             line-height: var(--body-body-line-height);
         }
+        
+        /* Control avatar size to be consistent across browsers */
+        .topbar__avatar {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .topbar__avatar img {
+            width: 36px;
+            height: 36px;
+            max-width: 36px;
+            max-height: 36px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body class="bg-grey-50">
@@ -112,7 +132,7 @@
 
             <!-- Main Navigation Tabs -->
             <div class="tabs tabs-large">
-                <div class="tab-item active">
+                <div class="tab-item">
                     <div class="tab-content">
                         <div class="tab-text body-text-medium">Table Overview</div>
                     </div>
@@ -124,7 +144,7 @@
                     </div>
                     <div class="tab-active-line"></div>
                 </div>
-                <div class="tab-item">
+                <div class="tab-item active">
                     <div class="tab-content">
                         <div class="tab-text body-text-medium">Profiling</div>
                     </div>

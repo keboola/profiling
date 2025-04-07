@@ -52,6 +52,26 @@
         .activity-row.active .fa-table {
             color: var(--secondary-blue-600) !important;
         }
+        
+        /* Control avatar size to be consistent across browsers */
+        .topbar__avatar {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .topbar__avatar img {
+            width: 36px;
+            height: 36px;
+            max-width: 36px;
+            max-height: 36px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body class="bg-grey-50">
