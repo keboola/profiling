@@ -197,6 +197,12 @@
     </div>
 
     <script>
+        // Helper function to format numbers with spaces between thousands
+        function formatNumber(number) {
+            if (number === undefined || number === null) return '';
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        }
+        
         // Function to handle the transition to profiling page
         function startProfiling() {
             // Add loading state to the button

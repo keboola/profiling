@@ -359,7 +359,7 @@
                                         <div class="overview-card__header">
                                             <span class="overview-card__title">Distinct Values</span>
                                         </div>
-                                        <div class="overview-card__value" style="font-weight: 400;">${data.properties.distinct}</div>
+                                        <div class="overview-card__value" style="font-weight: 400;">${formatNumber(data.properties.distinct)}</div>
                                         <div class="overview-card__subtitle" style="font-weight: 400;">Unique values count</div>
                                     </div>
                                     
@@ -368,7 +368,7 @@
                                         <div class="overview-card__header">
                                             <span class="overview-card__title">Duplicate Values</span>
                                         </div>
-                                        <div class="overview-card__value" style="font-weight: 400;">${data.properties.duplicates}</div>
+                                        <div class="overview-card__value" style="font-weight: 400;">${formatNumber(data.properties.duplicates)}</div>
                                         <div class="overview-card__subtitle" style="font-weight: 400;">Number of duplicated values</div>
                                     </div>
                                     
@@ -377,7 +377,7 @@
                                         <div class="overview-card__header">
                                             <span class="overview-card__title">Missing Values</span>
                                         </div>
-                                        <div class="overview-card__value" style="font-weight: 400;">${data.properties.missing}</div>
+                                        <div class="overview-card__value" style="font-weight: 400;">${formatNumber(data.properties.missing)}</div>
                                         <div class="overview-card__subtitle" style="font-weight: 400;">Count of null values</div>
                                     </div>
                                 </div>
@@ -417,7 +417,7 @@
                                             <div class="overview-card__header">
                                                 <span class="overview-card__title">Distinct Count</span>
                                     </div>
-                                            <div class="overview-card__value" style="font-weight: 400;">${data.properties.distinct}</div>
+                                            <div class="overview-card__value" style="font-weight: 400;">${formatNumber(data.properties.distinct)}</div>
                                             <div class="overview-card__subtitle" style="font-weight: 400;">Unique values in column</div>
                                     </div>
                                         
@@ -449,6 +449,32 @@
     </div>
 
     <script>
+        // Helper function to format numbers with spaces between thousands
+        function formatNumber(number) {
+            if (number === undefined || number === null || number === '' || 
+                number === 'N/A' || number === 'N/A (non-numeric data)' || number === 'N/A (boolean data)') {
+                return number;
+            }
+            
+            // Return string as is if it's already a formatted string
+            if (typeof number === 'string' && number.includes(' ')) {
+                return number;
+            }
+            
+            try {
+                // Convert to number if it's a numeric string
+                if (typeof number === 'string' && !isNaN(parseFloat(number))) {
+                    number = parseFloat(number);
+                }
+                
+                // Format the number with spaces as thousand separators
+                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+            } catch (e) {
+                // Return original value if formatting fails
+                return number;
+            }
+        }
+
         // Column data mapping (sample data for each column)
         const columnData = {
             'user_id': {
@@ -458,8 +484,8 @@
                     duplicates: 0,
                     missing: 0
                 },
-                sampleValues: '10001, 10002, 10003, 10004, 10005, 10006, 10007, 10008, 10009, 10010',
-                outliers: '20455, 20456, 20457, 20458, 20459',
+                sampleValues: '10 001, 10 002, 10 003, 10 004, 10 005, 10 006, 10 007, 10 008, 10 009, 10 010',
+                outliers: '20 455, 20 456, 20 457, 20 458, 20 459',
                 statistics: {
                     mean: 15229,
                     median: 15230,
@@ -608,12 +634,6 @@
                 }
             }
         };
-
-        // Helper function to format numbers with spaces between thousands
-        function formatNumber(number) {
-            if (number === undefined || number === null) return '';
-            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-        }
 
         // Function to create a column view template
         function createColumnViewTemplate(columnName, data) {
@@ -882,7 +902,7 @@
                     if (insightMessage) {
                         insightMessage += ', ';
                     }
-                    insightMessage += `${data.properties.missing} missing values`;
+                    insightMessage += `${formatNumber(data.properties.missing)} missing values`;
                 }
                 
                 bannerTextElement.innerHTML = insightMessage;
@@ -1034,40 +1054,48 @@
                     `;
                 } else if (isNumericType || isBooleanType) {
                     // Numeric and Boolean statistics
-                    if (!isNA(data.statistics.mean)) {
-                statisticsContent += `
-                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Mean</span>
-                        <span class="body-text" style="font-weight: 400;">${isNumericType ? formatNumber(data.statistics.mean) : data.statistics.mean}</span>
-                    </div>
-                `;
+                    if (data.statistics.mean !== undefined && data.statistics.mean !== null && 
+                        data.statistics.mean !== 'N/A' && data.statistics.mean !== 'N/A (non-numeric data)' && 
+                        data.statistics.mean !== 'N/A (boolean data)') {
+                        statisticsContent += `
+                            <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Mean</span>
+                                <span class="body-text" style="font-weight: 400;">${formatNumber(data.statistics.mean)}</span>
+                            </div>
+                        `;
                     }
-                
-                    if (!isNA(data.statistics.median)) {
-                statisticsContent += `
-                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Median</span>
-                        <span class="body-text" style="font-weight: 400;">${isNumericType ? formatNumber(data.statistics.median) : data.statistics.median}</span>
-                    </div>
-                `;
+                    
+                    if (data.statistics.median !== undefined && data.statistics.median !== null && 
+                        data.statistics.median !== 'N/A' && data.statistics.median !== 'N/A (non-numeric data)' && 
+                        data.statistics.median !== 'N/A (boolean data)') {
+                        statisticsContent += `
+                            <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Median</span>
+                                <span class="body-text" style="font-weight: 400;">${formatNumber(data.statistics.median)}</span>
+                            </div>
+                        `;
                     }
-                
-                    if (!isNA(data.statistics.min)) {
-                statisticsContent += `
-                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Min</span>
-                        <span class="body-text" style="font-weight: 400;">${isNumericType ? formatNumber(data.statistics.min) : data.statistics.min}</span>
-                    </div>
-                `;
+                    
+                    if (data.statistics.min !== undefined && data.statistics.min !== null && 
+                        data.statistics.min !== 'N/A' && data.statistics.min !== 'N/A (non-numeric data)' && 
+                        data.statistics.min !== 'N/A (boolean data)') {
+                        statisticsContent += `
+                            <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Min</span>
+                                <span class="body-text" style="font-weight: 400;">${formatNumber(data.statistics.min)}</span>
+                            </div>
+                        `;
                     }
-                
-                    if (!isNA(data.statistics.max)) {
-                statisticsContent += `
-                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Max</span>
-                        <span class="body-text" style="font-weight: 400;">${isNumericType ? formatNumber(data.statistics.max) : data.statistics.max}</span>
-                    </div>
-                `;
+                    
+                    if (data.statistics.max !== undefined && data.statistics.max !== null && 
+                        data.statistics.max !== 'N/A' && data.statistics.max !== 'N/A (non-numeric data)' && 
+                        data.statistics.max !== 'N/A (boolean data)') {
+                        statisticsContent += `
+                            <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Max</span>
+                                <span class="body-text" style="font-weight: 400;">${formatNumber(data.statistics.max)}</span>
+                            </div>
+                        `;
                     }
                 }
                 
@@ -1104,7 +1132,8 @@
                 if (isNumericType && hasOutliers) {
                     // Format outliers for display
                     const outlierValues = data.outliers.split(',').map(v => v.trim());
-                    const formattedOutliers = outlierValues.join(', ');
+                    // Format each outlier value with the formatNumber function
+                    const formattedOutliers = outlierValues.map(val => formatNumber(val)).join(', ');
                     
                     // If card doesn't exist, create it after Sample Values card
                     if (!outliersCard) {
@@ -1183,7 +1212,7 @@
                         <div class="overview-card__header">
                             <span class="overview-card__title">Distinct Values</span>
                         </div>
-                        <div class="overview-card__value" style="font-weight: 400;">${data.properties.distinct}</div>
+                        <div class="overview-card__value" style="font-weight: 400;">${formatNumber(data.properties.distinct)}</div>
                         <div class="overview-card__subtitle" style="font-weight: 400;">Unique values count</div>
                     </div>
                     
@@ -1192,7 +1221,7 @@
                         <div class="overview-card__header">
                             <span class="overview-card__title">Duplicate Values</span>
                         </div>
-                        <div class="overview-card__value" style="font-weight: 400;">${data.properties.duplicates}</div>
+                        <div class="overview-card__value" style="font-weight: 400;">${formatNumber(data.properties.duplicates)}</div>
                         <div class="overview-card__subtitle" style="font-weight: 400;">Number of duplicated values</div>
                     </div>
                     
@@ -1201,7 +1230,7 @@
                         <div class="overview-card__header">
                             <span class="overview-card__title">Missing Values</span>
                         </div>
-                        <div class="overview-card__value" style="font-weight: 400;">${data.properties.missing}</div>
+                        <div class="overview-card__value" style="font-weight: 400;">${formatNumber(data.properties.missing)}</div>
                         <div class="overview-card__subtitle" style="font-weight: 400;">Count of null values</div>
                     </div>
                 </div>
@@ -1219,8 +1248,14 @@
                 });
             } else {
                 // Show and update Sample Values for non-boolean columns
+                // Format sample values if they are numeric
+                let formattedSampleValues = data.sampleValues;
+                if (data.properties.columnType === 'Integer' || data.properties.columnType === 'Float' || data.properties.columnType === 'Number') {
+                    formattedSampleValues = data.sampleValues.split(', ').map(val => formatNumber(val.trim())).join(', ');
+                }
+                
                 updateCardContent('Sample Values', `
-                    <span class="body-text" style="font-weight: 400;">${data.sampleValues}</span>
+                    <span class="body-text" style="font-weight: 400;">${formattedSampleValues}</span>
                 `);
             }
             
@@ -1270,7 +1305,7 @@
                                 <div class="overview-card__header">
                                     <span class="overview-card__title">Distinct Count</span>
                                 </div>
-                                <div class="overview-card__value" style="font-weight: 400;">${distinctCount}</div>
+                                <div class="overview-card__value" style="font-weight: 400;">${formatNumber(distinctCount)}</div>
                                 <div class="overview-card__subtitle" style="font-weight: 400;">${isBooleanType ? 'true/false values' : 'Unique values in column'}</div>
                             </div>
                             
@@ -1351,7 +1386,7 @@
                                         callbacks: {
                                             label: function(context) {
                                                 const percentage = ((context.raw / totalRecords) * 100).toFixed(1);
-                                                return `${context.raw} records (${percentage}%)`;
+                                                return `${formatNumber(context.raw)} records (${percentage}%)`;
                                             }
                                         }
                                     }
@@ -1365,6 +1400,9 @@
                                         ticks: {
                                             font: {
                                                 family: 'Inter'
+                                            },
+                                            callback: function(value) {
+                                                return formatNumber(value);
                                             }
                                         }
                                     },
@@ -1418,7 +1456,7 @@
                                     tooltip: {
                                         callbacks: {
                                             label: function(context) {
-                                                return `${context.raw} occurrences`;
+                                                return `${formatNumber(context.raw)} occurrences`;
                                             }
                                         }
                                     }
@@ -1432,6 +1470,9 @@
                                         ticks: {
                                             font: {
                                                 family: 'Inter'
+                                            },
+                                            callback: function(value) {
+                                                return formatNumber(value);
                                             }
                                         }
                                     },
