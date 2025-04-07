@@ -234,12 +234,7 @@
                                         <div class="icon-container icon-small">
                                             <i class="fas fa-columns icon-muted"></i>
                                         </div>
-                                        <div style="display: flex; align-items: center; gap: 4px;">
-                                            <span class="activity-row__text">user_id</span>
-                                            <div class="icon-container icon-small" title="Contains outliers">
-                                                <i class="fas fa-exclamation-triangle" style="color: var(--warning-orange-500-base);"></i>
-                                            </div>
-                                        </div>
+                                        <span class="activity-row__text">user_id</span>
                                     </div>
                                     <div class="activity-row__meta">
                                         <span>Integer</span>
@@ -251,12 +246,7 @@
                                         <div class="icon-container icon-small">
                                             <i class="fas fa-columns icon-muted"></i>
                                         </div>
-                                        <div style="display: flex; align-items: center; gap: 4px;">
-                                            <span class="activity-row__text">email</span>
-                                            <div class="icon-container icon-small" title="Contains missing values">
-                                                <i class="fas fa-exclamation-triangle" style="color: var(--warning-orange-500-base);"></i>
-                                            </div>
-                                        </div>
+                                        <span class="activity-row__text">email</span>
                                     </div>
                                     <div class="activity-row__meta">
                                         <span>String</span>
@@ -292,12 +282,7 @@
                                         <div class="icon-container icon-small">
                                             <i class="fas fa-columns icon-muted"></i>
                                         </div>
-                                        <div style="display: flex; align-items: center; gap: 4px;">
-                                            <span class="activity-row__text">signup_date</span>
-                                            <div class="icon-container icon-small" title="Contains missing values">
-                                                <i class="fas fa-exclamation-triangle" style="color: var(--warning-orange-500-base);"></i>
-                                            </div>
-                                        </div>
+                                        <span class="activity-row__text">signup_date</span>
                                     </div>
                                     <div class="activity-row__meta">
                                         <span>Date</span>
@@ -309,12 +294,7 @@
                                         <div class="icon-container icon-small">
                                             <i class="fas fa-columns icon-muted"></i>
                                         </div>
-                                        <div style="display: flex; align-items: center; gap: 4px;">
-                                            <span class="activity-row__text">status</span>
-                                            <div class="icon-container icon-small" title="Contains missing values">
-                                                <i class="fas fa-exclamation-triangle" style="color: var(--warning-orange-500-base);"></i>
-                                            </div>
-                                        </div>
+                                        <span class="activity-row__text">status</span>
                                     </div>
                                     <div class="activity-row__meta">
                                         <span>Boolean</span>
@@ -330,67 +310,13 @@
                         <h2 class="heading-2" id="column-title" style="padding-bottom: 0;">user_id</h2>
                         
                         <!-- Detected Issues Banner with Title -->
-                        <div class="banner style-variant-warning">
+                        <div class="banner style-variant-secondary">
                             <div class="icon-container icon-small">
-                                <i class="fas fa-exclamation-triangle icon-warning"></i>
+                                <i class="fas fa-info-circle" style="color: var(--secondary-blue-600);"></i>
                             </div>
                             <div class="content">
-                                <div class="title body-text-medium">Column Quality Issues</div>
+                                <div class="title body-text-medium">Column Insights</div>
                                 <div class="text body-text">Outliers in <strong>user_id</strong> column (5 values), missing values in multiple columns (563 records)</div>
-                            </div>
-                        </div>
-                        
-                        <!-- Data Quality Widget -->
-                        <div class="card bg-white">
-                            <h2 class="card__title heading-4">Data Quality Metrics</h2>
-                            <div class="card__content">
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);">
-                                    <!-- Left column metrics -->
-                                    <div style="display: flex; flex-direction: column; gap: var(--space-3);">
-                                        <div>
-                                            <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
-                                                <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Completeness</span>
-                                                <span>98.7%</span>
-                                            </div>
-                                            <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
-                                                <div style="height: 100%; width: 98.7%; background-color: var(--success-green-500-base); border-radius: 4px;"></div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div>
-                                            <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
-                                                <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Validity</span>
-                                                <span>92.5%</span>
-                                            </div>
-                                            <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
-                                                <div style="height: 100%; width: 92.5%; background-color: var(--success-green-500-base); border-radius: 4px;"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Right column metrics -->
-                                    <div style="display: flex; flex-direction: column; gap: var(--space-3);">
-                                        <div>
-                                            <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
-                                                <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Consistency</span>
-                                                <span>94.2%</span>
-                                            </div>
-                                            <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
-                                                <div style="height: 100%; width: 94.2%; background-color: var(--success-green-500-base); border-radius: 4px;"></div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div>
-                                            <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
-                                                <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Accuracy</span>
-                                                <span>87.3%</span>
-                                            </div>
-                                            <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
-                                                <div style="height: 100%; width: 87.3%; background-color: var(--warning-orange-500-base); border-radius: 4px;"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         
@@ -398,22 +324,41 @@
                         <div class="card bg-white">
                             <h2 class="card__title heading-4">Properties</h2>
                             <div class="card__content">
-                                <div style="display: flex; flex-direction: column; gap: var(--space-2);">
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Column Type</span>
-                                        <span class="body-text-medium">Integer</span>
+                                <div class="grid grid-cols-2" style="gap: var(--space-4)">
+                                    <!-- Column Type Card -->
+                                    <div class="overview-card overview-card--grey">
+                                        <div class="overview-card__header">
+                                            <span class="overview-card__title">Column Type</span>
+                                        </div>
+                                        <div class="overview-card__value" style="font-weight: 400;">${data.properties.columnType}</div>
+                                        <div class="overview-card__subtitle" style="font-weight: 400;">Data type of column</div>
                                     </div>
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Distinct (n)</span>
-                                        <span class="body-text-medium">4347</span>
+                                    
+                                    <!-- Distinct Values Card -->
+                                    <div class="overview-card overview-card--grey">
+                                        <div class="overview-card__header">
+                                            <span class="overview-card__title">Distinct Values</span>
+                                        </div>
+                                        <div class="overview-card__value" style="font-weight: 400;">${data.properties.distinct}</div>
+                                        <div class="overview-card__subtitle" style="font-weight: 400;">Unique values count</div>
                                     </div>
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Duplicate Values</span>
-                                        <span class="body-text-medium">20</span>
+                                    
+                                    <!-- Duplicate Values Card -->
+                                    <div class="overview-card overview-card--grey">
+                                        <div class="overview-card__header">
+                                            <span class="overview-card__title">Duplicate Values</span>
+                                        </div>
+                                        <div class="overview-card__value" style="font-weight: 400;">${data.properties.duplicates}</div>
+                                        <div class="overview-card__subtitle" style="font-weight: 400;">Number of duplicated values</div>
                                     </div>
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Missing Values</span>
-                                        <span class="body-text-medium">563</span>
+                                    
+                                    <!-- Missing Values Card -->
+                                    <div class="overview-card overview-card--grey">
+                                        <div class="overview-card__header">
+                                            <span class="overview-card__title">Missing Values</span>
+                                        </div>
+                                        <div class="overview-card__value" style="font-weight: 400;">${data.properties.missing}</div>
+                                        <div class="overview-card__subtitle" style="font-weight: 400;">Count of null values</div>
                                     </div>
                                 </div>
                             </div>
@@ -423,7 +368,7 @@
                         <div class="card bg-white">
                             <h2 class="card__title heading-4">Sample Values</h2>
                             <div class="card__content">
-                                <span class="body-text-medium">24, 32, 27, 45, 36, 19, 27, 34, 52, 34</span>
+                                <span class="body-text" style="font-weight: 400;">24, 32, 27, 45, 36, 19, 27, 34, 52, 34</span>
                             </div>
                         </div>
                         
@@ -431,47 +376,49 @@
                         <div class="card bg-white">
                             <h2 class="card__title heading-4">Outliers</h2>
                             <div class="card__content">
-                                <span class="body-text-medium">18, 62, 63, 64, 65</span>
+                                <span class="body-text" style="font-weight: 400;">18, 62, 63, 64, 65</span>
                             </div>
                         </div>
 
                         <!-- Statistics Card -->
                         <div class="card bg-white">
                             <h2 class="card__title heading-4">Statistics</h2>
+                            <div class="card__content"></div>
+                        </div>
+                        
+                        <!-- Distinct Values Card -->
+                        <div class="card bg-white">
+                            <h2 class="card__title heading-4">Distinct Values</h2>
                             <div class="card__content">
-                                <div style="display: flex; flex-direction: column; gap: var(--space-2);">
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Mean</span>
-                                        <span class="body-text-medium">35</span>
+                                <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+                                    <div class="grid grid-cols-2" style="gap: var(--space-4)">
+                                        <!-- Distinct Count Card -->
+                                        <div class="overview-card overview-card--grey">
+                                            <div class="overview-card__header">
+                                                <span class="overview-card__title">Distinct Count</span>
                                     </div>
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Median</span>
-                                        <span class="body-text-medium">34</span>
+                                            <div class="overview-card__value" style="font-weight: 400;">${data.properties.distinct}</div>
+                                            <div class="overview-card__subtitle" style="font-weight: 400;">Unique values in column</div>
                                     </div>
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Min</span>
-                                        <span class="body-text-medium">18</span>
+                                        
+                                        <!-- Uniqueness Card -->
+                                        <div class="overview-card overview-card--grey">
+                                            <div class="overview-card__header">
+                                                <span class="overview-card__title">Uniqueness</span>
                                     </div>
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Max</span>
-                                        <span class="body-text-medium">65</span>
-                                    </div>
-                                </div>
+                                            <div class="overview-card__value" style="font-weight: 400;">${((data.properties.distinct / 12458) * 100).toFixed(1)}%</div>
+                                            <div class="overview-card__subtitle" style="font-weight: 400;">Percentage of unique values</div>
                             </div>
                         </div>
                         
-                        <!-- Range & Frequency -->
-                        <div class="card">
-                            <div class="card__header">
-                                <span class="card__title">Range & Frequency</span>
+                                    <!-- Top 5 Values section with chart -->
+                                    <div style="margin-top: var(--space-2);">
+                                        <h3 class="body-text-medium" style="margin-bottom: var(--space-3); color: var(--neutral-grey-800);">Top 5 Values</h3>
+                                        
+                                        <div style="height: 200px;">
+                                            <canvas id="topValuesChart"></canvas>
                             </div>
-                            <div class="card__content">
-                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
-                                    <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Range</span>
-                                    <span class="body-text-medium">18-65</span>
                                 </div>
-                                <div style="height: 200px;">
-                                    <canvas id="frequencyChart"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -518,10 +465,10 @@
                     missing: 124
                 },
                 sampleValues: 'john.doe@company.com, alice.smith@email.net, robert.jones@domain.org, sarah.wilson@mail.com',
-                outliers: 'n/a',
+                outliers: 'N/A (non-numeric data)',
                 statistics: {
-                    mean: 'N/A',
-                    median: 'N/A',
+                    mean: 'N/A (non-numeric data)',
+                    median: 'N/A (non-numeric data)',
                     min: 'N/A',
                     max: 'N/A'
                 },
@@ -532,7 +479,7 @@
                     accuracy: 96.5
                 },
                 rangeFrequency: {
-                    range: 'N/A',
+                    range: 'N/A (string data)',
                     chartData: [1224, 3674, 4898, 1837, 612]
                 }
             },
@@ -544,10 +491,10 @@
                     missing: 89
                 },
                 sampleValues: 'John Smith, Alice Johnson, Robert Wilson, Sarah Davis, Michael Brown',
-                outliers: 'n/a',
+                outliers: 'N/A (non-numeric data)',
                 statistics: {
-                    mean: 'N/A',
-                    median: 'N/A',
+                    mean: 'N/A (non-numeric data)',
+                    median: 'N/A (non-numeric data)',
                     min: 'N/A',
                     max: 'N/A'
                 },
@@ -558,7 +505,7 @@
                     accuracy: 95.6
                 },
                 rangeFrequency: {
-                    range: 'N/A',
+                    range: 'N/A (string data)',
                     chartData: [2249, 3374, 4122, 1837, 787]
                 }
             },
@@ -622,10 +569,10 @@
                     missing: 53
                 },
                 sampleValues: 'true, false, true, true, false',
-                outliers: 'n/a',
+                outliers: 'N/A (boolean data)',
                 statistics: {
                     mean: '0.82 (82% true)',
-                    median: 'N/A',
+                    median: 'N/A (boolean data)',
                     min: 'false',
                     max: 'true'
                 },
@@ -641,6 +588,217 @@
                 }
             }
         };
+
+        // Helper function to format numbers with spaces between thousands
+        function formatNumber(number) {
+            if (number === undefined || number === null) return '';
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        }
+
+        // Function to create a column view template
+        function createColumnViewTemplate(columnName, data) {
+            return `
+                <h2 class="heading-2" id="column-title" style="padding-bottom: 0;">${columnName}</h2>
+                
+                <div class="banner style-variant-secondary">
+                    <div class="icon-container icon-small">
+                        <i class="fas fa-info-circle" style="color: var(--secondary-blue-600);"></i>
+                    </div>
+                    <div class="content">
+                        <div class="title body-text-medium">Column Insights</div>
+                        <div class="text body-text"></div>
+                    </div>
+                </div>
+                
+                <div class="card bg-white">
+                    <h2 class="card__title heading-4">Properties</h2>
+                    <div class="card__content">
+                        <div class="grid grid-cols-2" style="gap: var(--space-4)">
+                            <!-- Column Type Card -->
+                            <div class="overview-card overview-card--grey">
+                                <div class="overview-card__header">
+                                    <span class="overview-card__title">Column Type</span>
+                                </div>
+                                <div class="overview-card__value" style="font-weight: 400;">${data ? data.properties.columnType : ''}</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">Data type of column</div>
+                            </div>
+                            
+                            <!-- Distinct Values Card -->
+                            <div class="overview-card overview-card--grey">
+                                <div class="overview-card__header">
+                                    <span class="overview-card__title">Distinct Values</span>
+                                </div>
+                                <div class="overview-card__value" style="font-weight: 400;">${data ? formatNumber(data.properties.distinct) : ''}</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">Unique values count</div>
+                            </div>
+                            
+                            <!-- Duplicate Values Card -->
+                            <div class="overview-card overview-card--grey">
+                                <div class="overview-card__header">
+                                    <span class="overview-card__title">Duplicate Values</span>
+                                </div>
+                                <div class="overview-card__value" style="font-weight: 400;">${data ? formatNumber(data.properties.duplicates) : ''}</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">Number of duplicated values</div>
+                            </div>
+                            
+                            <!-- Missing Values Card -->
+                            <div class="overview-card overview-card--grey">
+                                <div class="overview-card__header">
+                                    <span class="overview-card__title">Missing Values</span>
+                                </div>
+                                <div class="overview-card__value" style="font-weight: 400;">${data ? formatNumber(data.properties.missing) : ''}</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">Count of null values</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card bg-white">
+                    <h2 class="card__title heading-4">Sample Values</h2>
+                    <div class="card__content"></div>
+                </div>
+                
+                <div class="card bg-white">
+                    <h2 class="card__title heading-4">Outliers</h2>
+                    <div class="card__content"></div>
+                </div>
+
+                <div class="card bg-white">
+                    <h2 class="card__title heading-4">Statistics</h2>
+                    <div class="card__content"></div>
+                </div>
+                
+                <div class="card bg-white">
+                    <h2 class="card__title heading-4">Distinct Values</h2>
+                    <div class="card__content">
+                        <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+                            <div class="grid grid-cols-2" style="gap: var(--space-4)">
+                                <!-- Distinct Count Card -->
+                                <div class="overview-card overview-card--grey">
+                                    <div class="overview-card__header">
+                                        <span class="overview-card__title">Distinct Count</span>
+                                    </div>
+                                    <div class="overview-card__value" style="font-weight: 400;">${data ? formatNumber(data.properties.distinct) : ''}</div>
+                                    <div class="overview-card__subtitle" style="font-weight: 400;">Unique values in column</div>
+                                </div>
+                                
+                                <!-- Uniqueness Card -->
+                                <div class="overview-card overview-card--grey">
+                                    <div class="overview-card__header">
+                                        <span class="overview-card__title">Uniqueness</span>
+                                    </div>
+                                    <div class="overview-card__value" style="font-weight: 400;">${data ? ((data.properties.distinct / 12458) * 100).toFixed(1) : ''}%</div>
+                                    <div class="overview-card__subtitle" style="font-weight: 400;">Percentage of unique values</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Top 5 Values section with chart -->
+                            <div style="margin-top: var(--space-2);">
+                                <h3 class="body-text-medium" style="margin-bottom: var(--space-3); color: var(--neutral-grey-800);">Top 5 Values</h3>
+                                
+                                <div style="height: 200px;">
+                                    <canvas id="topValuesChart-${columnName}"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to create table overview template
+        function createTableOverviewTemplate(titleElement) {
+            const titleHtml = titleElement ? titleElement.outerHTML : '<h2 class="heading-2" id="column-title" style="padding-bottom: 0;">Table Overview</h2>';
+            
+            return `
+                ${titleHtml}
+                
+                <!-- Data Summary Card -->
+                <div class="card bg-white">
+                    <h2 class="card__title heading-4">Data Summary</h2>
+                    <div class="card__content">
+                        <div class="grid grid-cols-2" style="gap: var(--space-4)">
+                            <!-- Columns Card -->
+                            <div class="overview-card overview-card--grey">
+                                <div class="overview-card__header">
+                                    <span class="overview-card__title">Columns</span>
+                                </div>
+                                <div class="overview-card__value" style="font-weight: 400;">6</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">Total columns in table</div>
+                            </div>
+                            
+                            <!-- Rows Card -->
+                            <div class="overview-card overview-card--grey">
+                                <div class="overview-card__header">
+                                    <span class="overview-card__title">Rows</span>
+                                </div>
+                                <div class="overview-card__value" style="font-weight: 400;">${formatNumber(12458)}</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">Total records</div>
+                            </div>
+                            
+                            <!-- Attribute Types Card -->
+                            <div class="overview-card overview-card--grey">
+                                <div class="overview-card__header">
+                                    <span class="overview-card__title">Attribute Types</span>
+                                </div>
+                                <div class="overview-card__value" style="font-weight: 400;">4</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">String, Integer, Date, Boolean</div>
+                            </div>
+                            
+                            <!-- Data Size Card -->
+                            <div class="overview-card overview-card--grey">
+                                <div class="overview-card__header">
+                                    <span class="overview-card__title">Data Size</span>
+                                </div>
+                                <div class="overview-card__value" style="font-weight: 400;">4.8 MB</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">Total storage used</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Quality Overview -->
+                <div class="card bg-white">
+                    <h2 class="card__title heading-4">Data Quality Overview</h2>
+                    <div class="card__content">
+                        <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Missing Cells (Nulls)</span>
+                                <span class="body-text" style="font-weight: 400;">${formatNumber(648)} (5.2%)</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Duplicated Records</span>
+                                <span class="body-text" style="font-weight: 400;">${formatNumber(1245)} (10%)</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Duplicated Rows</span>
+                                <span class="body-text" style="font-weight: 400;">${formatNumber(213)} (1.7%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profiling Metadata -->
+                <div class="card bg-white">
+                    <h2 class="card__title heading-4">Profiling Metadata</h2>
+                    <div class="card__content">
+                        <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Last Profiled</span>
+                                <span class="body-text" style="font-weight: 400;">Feb 12 16:29</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Profiled by</span>
+                                <div style="display: flex; align-items: center; gap: var(--space-2);">
+                                    <div style="width: 24px; height: 24px; border-radius: 50%; background-color: var(--secondary-blue-600); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px;">T</div>
+                                    <span class="body-text" style="font-weight: 400;">Tomáš Janoušek</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
 
         // Function to update content based on selected column
         function selectColumn(columnName, columnType, element) {
@@ -678,107 +836,7 @@
                     const firstCardTitle = cards[0].querySelector('.card__title');
                     if (firstCardTitle && firstCardTitle.textContent === 'Data Summary') {
                         // We need to restore the column view structure
-                        rightPanel.innerHTML = `
-                            <h2 class="heading-2" id="column-title" style="padding-bottom: 0;">${columnName}</h2>
-                            
-                            <div class="banner style-variant-warning">
-                                <div class="icon-container icon-small">
-                                    <i class="fas fa-exclamation-triangle icon-warning"></i>
-                                </div>
-                                <div class="content">
-                                    <div class="title body-text-medium">Column Quality Issues</div>
-                                    <div class="text body-text"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="card bg-white">
-                                <h2 class="card__title heading-4">Data Quality Metrics</h2>
-                                <div class="card__content">
-                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);">
-                                        <!-- Left column metrics -->
-                                        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
-                                            <div>
-                                                <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
-                                                    <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Completeness</span>
-                                                    <span>98.7%</span>
-                                                </div>
-                                                <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
-                                                    <div style="height: 100%; width: 98.7%; background-color: var(--success-green-500-base); border-radius: 4px;"></div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div>
-                                                <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
-                                                    <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Validity</span>
-                                                    <span>92.5%</span>
-                                                </div>
-                                                <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
-                                                    <div style="height: 100%; width: 92.5%; background-color: var(--success-green-500-base); border-radius: 4px;"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- Right column metrics -->
-                                        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
-                                            <div>
-                                                <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
-                                                    <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Consistency</span>
-                                                    <span>94.2%</span>
-                                                </div>
-                                                <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
-                                                    <div style="height: 100%; width: 94.2%; background-color: var(--success-green-500-base); border-radius: 4px;"></div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div>
-                                                <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
-                                                    <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Accuracy</span>
-                                                    <span>87.3%</span>
-                                                </div>
-                                                <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
-                                                    <div style="height: 100%; width: 87.3%; background-color: var(--warning-orange-500-base); border-radius: 4px;"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="card bg-white">
-                                <h2 class="card__title heading-4">Properties</h2>
-                                <div class="card__content"></div>
-                            </div>
-                            
-                            <div class="card bg-white">
-                                <h2 class="card__title heading-4">Sample Values</h2>
-                                <div class="card__content"></div>
-                            </div>
-                            
-                            <div class="card bg-white">
-                                <h2 class="card__title heading-4">Outliers</h2>
-                                <div class="card__content"></div>
-                            </div>
-
-                            <div class="card bg-white">
-                                <h2 class="card__title heading-4">Statistics</h2>
-                                <div class="card__content"></div>
-                            </div>
-                            
-                            <div class="card">
-                                <div class="card__header">
-                                    <span class="card__title">Range & Frequency</span>
-                                </div>
-                                <div class="card__content">
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
-                                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Range</span>
-                                        <span class="body-text-medium">18-65</span>
-                                    </div>
-                                    <div style="height: 200px;">
-                                        <canvas id="frequencyChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
+                        rightPanel.innerHTML = createColumnViewTemplate(columnName, data);
                     }
                 }
             }
@@ -788,41 +846,33 @@
             const bannerTextElement = document.querySelector('.banner .text');
             
             if (bannerTitleElement && bannerTextElement) {
-                // Check if the selected column has a warning icon
-                const selectedColumn = document.querySelector('.activity-row.active');
-                const hasWarningIcon = selectedColumn && selectedColumn.querySelector('.fa-exclamation-triangle');
+                bannerTitleElement.textContent = 'Column Insights';
                 
-                if (hasWarningIcon) {
-                    bannerTitleElement.textContent = 'Column Quality Issues';
-                    
-                    // Create appropriate warning message based on column data
-                    let warningMessage = '';
-                    
-                    // Check for outliers
-                    if (data.outliers && data.outliers !== 'n/a') {
-                        const outliersList = data.outliers.split(',');
-                        warningMessage += `${outliersList.length} outliers found`;
+                // Create appropriate insight message based on column data
+                let insightMessage = '';
+                
+                // Check for outliers
+                if (data.outliers && data.outliers !== 'N/A (non-numeric data)' && data.outliers !== 'N/A (boolean data)') {
+                    const outliersList = data.outliers.split(',');
+                    insightMessage += `${outliersList.length} outliers found`;
+                }
+                
+                // Check for missing values
+                if (data.properties.missing > 0) {
+                    if (insightMessage) {
+                        insightMessage += ', ';
                     }
-                    
-                    // Check for missing values
-                    if (data.properties.missing > 0) {
-                        if (warningMessage) {
-                            warningMessage += ', ';
-                        }
-                        warningMessage += `${data.properties.missing} missing values`;
-                    }
-                    
-                    bannerTextElement.innerHTML = warningMessage;
-                    
-                    // Show the banner
-                    const bannerElement = document.querySelector('.banner');
-                    if (bannerElement) {
+                    insightMessage += `${data.properties.missing} missing values`;
+                }
+                
+                bannerTextElement.innerHTML = insightMessage;
+                
+                // Show the banner only if there are insights
+                const bannerElement = document.querySelector('.banner');
+                if (bannerElement) {
+                    if (insightMessage) {
                         bannerElement.style.display = '';
-                    }
-                } else {
-                    // Hide the banner if no warning icon
-                    const bannerElement = document.querySelector('.banner');
-                    if (bannerElement) {
+                    } else {
                         bannerElement.style.display = 'none';
                     }
                 }
@@ -849,83 +899,541 @@
                 return false;
             }
             
+            // Helper function to check if a value is any form of N/A
+            function isNA(value) {
+                if (!value) return true;
+                const naValues = ['N/A', 'N/A (boolean data)', 'N/A (non-numeric data)'];
+                return naValues.includes(value);
+            }
+            
+            // Helper function to update content for Statistics card
+            function updateStatisticsCard(data) {
+                const isNumericType = ['Integer', 'Float', 'Number'].includes(data.properties.columnType);
+                const isStringType = ['String', 'Text', 'Varchar'].includes(data.properties.columnType);
+                const isBooleanType = data.properties.columnType === 'Boolean';
+                const isDateType = data.properties.columnType === 'Date';
+                
+                let statisticsContent = `
+                    <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                `;
+                
+                if (isDateType) {
+                    // Date-specific statistics
+                    const dates = data.sampleValues.split(', ').map(d => new Date(d));
+                    const validDates = dates.filter(d => !isNaN(d.getTime()));
+                    
+                    if (validDates.length > 0) {
+                        const minDate = new Date(Math.min(...validDates));
+                        const maxDate = new Date(Math.max(...validDates));
+                        const range = Math.ceil((maxDate - minDate) / (1000 * 60 * 60 * 24)); // days
+                        
+                        statisticsContent += `
+                            <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Earliest Date</span>
+                                <span class="body-text" style="font-weight: 400;">${minDate.toLocaleDateString()}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Latest Date</span>
+                                <span class="body-text" style="font-weight: 400;">${maxDate.toLocaleDateString()}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Date Range</span>
+                                <span class="body-text" style="font-weight: 400;">${formatNumber(range)} days</span>
+                            </div>
+                        `;
+                        
+                        // Calculate year distribution
+                        const years = validDates.map(d => d.getFullYear());
+                        const uniqueYears = [...new Set(years)];
+                        const yearCounts = uniqueYears.map(year => ({
+                            year,
+                            count: years.filter(y => y === year).length
+                        }));
+                        
+                        if (yearCounts.length > 0) {
+                            statisticsContent += `
+                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                                    <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Year Range</span>
+                                    <span class="body-text" style="font-weight: 400;">${Math.min(...uniqueYears)} - ${Math.max(...uniqueYears)}</span>
+                                </div>
+                            `;
+                        }
+                    }
+                } else if (isStringType) {
+                    // String-specific statistics
+                    const sampleValues = data.sampleValues.split(', ');
+                    const lengths = sampleValues.map(str => str.length);
+                    const avgLength = Math.round(lengths.reduce((a, b) => a + b, 0) / lengths.length);
+                    const minLength = Math.min(...lengths);
+                    const maxLength = Math.max(...lengths);
+                    
+                    statisticsContent += `
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                            <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Average Length</span>
+                            <span class="body-text" style="font-weight: 400;">${formatNumber(avgLength)} characters</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                            <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Min Length</span>
+                            <span class="body-text" style="font-weight: 400;">${formatNumber(minLength)} characters</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                            <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Max Length</span>
+                            <span class="body-text" style="font-weight: 400;">${formatNumber(maxLength)} characters</span>
+                        </div>
+                    `;
+                    
+                    // Get string patterns based on column content
+                    let patternLabel = "Common Patterns";
+                    let patternCount = "3";
+                    
+                    // For email specifically, count domains
+                    if (columnName === 'email') {
+                        const domains = sampleValues
+                            .map(email => email.split('@')[1])
+                            .filter(domain => domain);
+                        
+                        const uniqueDomains = [...new Set(domains)];
+                        patternLabel = "Unique Domains";
+                        patternCount = formatNumber(uniqueDomains.length);
+                    } else if (columnName === 'name') {
+                        // For name columns, count words
+                        const wordCounts = sampleValues
+                            .map(name => name.split(' ').length)
+                            .filter(count => count);
+                        
+                        const avgWords = Math.round((wordCounts.reduce((a, b) => a + b, 0) / wordCounts.length) * 10) / 10;
+                        patternLabel = "Average Words";
+                        patternCount = avgWords;
+                    }
+                    
+                    statisticsContent += `
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                            <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">${patternLabel}</span>
+                            <span class="body-text" style="font-weight: 400;">${patternCount}</span>
+                        </div>
+                    `;
+                } else if (isNumericType || isBooleanType) {
+                    // Numeric and Boolean statistics
+                    if (!isNA(data.statistics.mean)) {
+                statisticsContent += `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Mean</span>
+                        <span class="body-text" style="font-weight: 400;">${isNumericType ? formatNumber(data.statistics.mean) : data.statistics.mean}</span>
+                    </div>
+                `;
+                    }
+                
+                    if (!isNA(data.statistics.median)) {
+                statisticsContent += `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Median</span>
+                        <span class="body-text" style="font-weight: 400;">${isNumericType ? formatNumber(data.statistics.median) : data.statistics.median}</span>
+                    </div>
+                `;
+                    }
+                
+                    if (!isNA(data.statistics.min)) {
+                statisticsContent += `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Min</span>
+                        <span class="body-text" style="font-weight: 400;">${isNumericType ? formatNumber(data.statistics.min) : data.statistics.min}</span>
+                    </div>
+                `;
+                    }
+                
+                    if (!isNA(data.statistics.max)) {
+                statisticsContent += `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Max</span>
+                        <span class="body-text" style="font-weight: 400;">${isNumericType ? formatNumber(data.statistics.max) : data.statistics.max}</span>
+                    </div>
+                `;
+                    }
+                }
+                
+                statisticsContent += `</div>`;
+                
+                // Update the Statistics card content
+                updateCardContent('Statistics', statisticsContent);
+            }
+            
+            // Helper function to update outliers
+            function updateOutliersCard(data) {
+                // Find all cards
+                const cards = document.querySelectorAll('.card');
+                let outliersCard = null;
+                
+                // Find the Outliers card
+                cards.forEach(card => {
+                    const title = card.querySelector('.card__title');
+                    if (title && title.textContent.trim() === 'Outliers') {
+                        outliersCard = card;
+                    }
+                });
+                
+                const isNumericType = ['Integer', 'Float', 'Number'].includes(data.properties.columnType);
+                const hasOutliers = data.outliers && !isNA(data.outliers) && data.outliers !== 'N/A (boolean data)' && data.outliers !== 'N/A (non-numeric data)';
+                
+                // Remove the card if it exists and shouldn't be shown
+                if (outliersCard && (!isNumericType || !hasOutliers)) {
+                    outliersCard.parentElement.removeChild(outliersCard);
+                    return;
+                }
+                
+                // Only show outliers for numeric types with actual outliers
+                if (isNumericType && hasOutliers) {
+                    // Format outliers for display
+                    const outlierValues = data.outliers.split(',').map(v => v.trim());
+                    const formattedOutliers = outlierValues.join(', ');
+                    
+                    // If card doesn't exist, create it after Sample Values card
+                    if (!outliersCard) {
+                        const cards = document.querySelectorAll('.card');
+                        let insertAfterCard = null;
+                        
+                        // Find Sample Values card to insert after it
+                        cards.forEach(card => {
+                            const title = card.querySelector('.card__title');
+                            if (title && title.textContent.trim() === 'Sample Values') {
+                                insertAfterCard = card;
+                            }
+                        });
+                        
+                        if (insertAfterCard) {
+                            const newOutliersCard = document.createElement('div');
+                            newOutliersCard.className = 'card bg-white';
+                            newOutliersCard.innerHTML = `
+                                <h2 class="card__title heading-4">Outliers</h2>
+                                <div class="card__content">
+                                    <span class="body-text" style="font-weight: 400;">${formattedOutliers}</span>
+                                </div>
+                            `;
+                            insertAfterCard.parentElement.insertBefore(newOutliersCard, insertAfterCard.nextSibling);
+                        }
+                    } else {
+                        // Update existing card
+                        const contentDiv = outliersCard.querySelector('.card__content');
+                        if (contentDiv) {
+                            contentDiv.innerHTML = `
+                                <span class="body-text" style="font-weight: 400;">${formattedOutliers}</span>
+                            `;
+                        }
+                        
+                        // Ensure correct position (after Sample Values)
+                        const cards = document.querySelectorAll('.card');
+                        let sampleValuesCard = null;
+                        let outlierPos = -1;
+                        let samplePos = -1;
+                        
+                        // Find positions of both cards
+                        for (let i = 0; i < cards.length; i++) {
+                            const title = cards[i].querySelector('.card__title');
+                            if (title && title.textContent.trim() === 'Sample Values') {
+                                sampleValuesCard = cards[i];
+                                samplePos = i;
+                            }
+                            if (title && title.textContent.trim() === 'Outliers') {
+                                outlierPos = i;
+                            }
+                        }
+                        
+                        // If found and in wrong order, move the outliers card
+                        if (sampleValuesCard && outlierPos > -1 && samplePos > -1 && outlierPos !== samplePos + 1) {
+                            const parent = sampleValuesCard.parentElement;
+                            parent.insertBefore(outliersCard, sampleValuesCard.nextSibling);
+                        }
+                    }
+                }
+            }
+            
             // Update Properties card
             updateCardContent('Properties', `
-                <div style="display: flex; flex-direction: column; gap: var(--space-2);">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Column Type</span>
-                        <span class="body-text-medium">${data.properties.columnType}</span>
+                <div class="grid grid-cols-2" style="gap: var(--space-4)">
+                    <!-- Column Type Card -->
+                    <div class="overview-card overview-card--grey">
+                        <div class="overview-card__header">
+                            <span class="overview-card__title">Column Type</span>
+                        </div>
+                        <div class="overview-card__value" style="font-weight: 400;">${data.properties.columnType}</div>
+                        <div class="overview-card__subtitle" style="font-weight: 400;">Data type of column</div>
                     </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Distinct (n)</span>
-                        <span class="body-text-medium">${data.properties.distinct}</span>
+                    
+                    <!-- Distinct Values Card -->
+                    <div class="overview-card overview-card--grey">
+                        <div class="overview-card__header">
+                            <span class="overview-card__title">Distinct Values</span>
+                        </div>
+                        <div class="overview-card__value" style="font-weight: 400;">${data.properties.distinct}</div>
+                        <div class="overview-card__subtitle" style="font-weight: 400;">Unique values count</div>
                     </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Duplicate Values</span>
-                        <span class="body-text-medium">${data.properties.duplicates}</span>
+                    
+                    <!-- Duplicate Values Card -->
+                    <div class="overview-card overview-card--grey">
+                        <div class="overview-card__header">
+                            <span class="overview-card__title">Duplicate Values</span>
+                        </div>
+                        <div class="overview-card__value" style="font-weight: 400;">${data.properties.duplicates}</div>
+                        <div class="overview-card__subtitle" style="font-weight: 400;">Number of duplicated values</div>
                     </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Missing Values</span>
-                        <span class="body-text-medium">${data.properties.missing}</span>
+                    
+                    <!-- Missing Values Card -->
+                    <div class="overview-card overview-card--grey">
+                        <div class="overview-card__header">
+                            <span class="overview-card__title">Missing Values</span>
+                        </div>
+                        <div class="overview-card__value" style="font-weight: 400;">${data.properties.missing}</div>
+                        <div class="overview-card__subtitle" style="font-weight: 400;">Count of null values</div>
                     </div>
                 </div>
             `);
             
             // Update Sample Values card
-            updateCardContent('Sample Values', `
-                <span class="body-text-medium">${data.sampleValues}</span>
-            `);
+            if (data.properties.columnType === 'Boolean') {
+                // Hide Sample Values card for boolean columns
+                const sampleValuesCards = document.querySelectorAll('.card');
+                sampleValuesCards.forEach(card => {
+                    const title = card.querySelector('.card__title');
+                    if (title && title.textContent.trim() === 'Sample Values') {
+                        card.style.display = 'none';
+                    }
+                });
+            } else {
+                // Show and update Sample Values for non-boolean columns
+                updateCardContent('Sample Values', `
+                    <span class="body-text" style="font-weight: 400;">${data.sampleValues}</span>
+                `);
+            }
             
-            // Update Outliers card
-            updateCardContent('Outliers', `
-                <span class="body-text-medium">${data.outliers}</span>
-            `);
+            // Call updateOutliersCard to properly handle the Outliers card
+            updateOutliersCard(data);
             
             // Update Statistics card
-            updateCardContent('Statistics', `
-                <div style="display: flex; flex-direction: column; gap: var(--space-2);">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Mean</span>
-                        <span class="body-text-medium">${data.statistics.mean}</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Median</span>
-                        <span class="body-text-medium">${data.statistics.median}</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Min</span>
-                        <span class="body-text-medium">${data.statistics.min}</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                        <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Max</span>
-                        <span class="body-text-medium">${data.statistics.max}</span>
-                    </div>
-                </div>
-            `);
+            updateStatisticsCard(data);
             
             // Update Quality Metrics
             updateQualityMetrics(data.qualityMetrics);
             
-            // Update Range & Frequency
-            const rangeFrequencyCards = document.querySelectorAll('.card__title');
-            for (let i = 0; i < rangeFrequencyCards.length; i++) {
-                if (rangeFrequencyCards[i].textContent.trim() === 'Range & Frequency') {
-                    const contentEl = rangeFrequencyCards[i].closest('.card').querySelector('.card__content');
-                    if (contentEl) {
-                        const firstDiv = contentEl.querySelector('div:first-child');
-                        if (firstDiv) {
-                            firstDiv.innerHTML = `
-                                <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Range</span>
-                                <span class="body-text-medium">${data.rangeFrequency.range}</span>
-                            `;
-                        }
-                    }
-                    break;
+            // Remove existing Distinct Values card if it exists
+            const existingDistinctCards = document.querySelectorAll('.card');
+            existingDistinctCards.forEach(card => {
+                const title = card.querySelector('.card__title');
+                if (title && title.textContent.trim() === 'Distinct Values') {
+                    card.parentElement.removeChild(card);
                 }
+            });
+            
+            // Update Distinct Values visualization
+            const distinctValuesCard = document.createElement('div');
+            distinctValuesCard.className = 'card bg-white';
+            
+            // Special handling for Boolean type
+            const isBooleanType = data.properties.columnType === 'Boolean';
+            const totalRecords = 12458;
+            const distinctCount = data.properties.distinct;
+            const uniquenessPercentage = ((distinctCount / totalRecords) * 100).toFixed(1);
+            
+            // For Boolean type, calculate true/false distribution
+            let trueCount = 0;
+            let falseCount = 0;
+            if (isBooleanType) {
+                trueCount = Math.round(totalRecords * 0.82); // 82% true from the mean
+                falseCount = totalRecords - trueCount - data.properties.missing;
             }
             
-            // Update chart
-            updateFrequencyChart(columnName, data.rangeFrequency.chartData);
+            distinctValuesCard.innerHTML = `
+                <h2 class="card__title heading-4">Distinct Values</h2>
+                <div class="card__content">
+                    <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+                        <div class="grid grid-cols-2" style="gap: var(--space-4)">
+                            <!-- Distinct Count Card -->
+                            <div class="overview-card overview-card--grey">
+                                <div class="overview-card__header">
+                                    <span class="overview-card__title">Distinct Count</span>
+                                </div>
+                                <div class="overview-card__value" style="font-weight: 400;">${distinctCount}</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">${isBooleanType ? 'true/false values' : 'Unique values in column'}</div>
+                            </div>
+                            
+                            <!-- Distribution Card for Boolean -->
+                            <div class="overview-card overview-card--grey">
+                                <div class="overview-card__header">
+                                    <span class="overview-card__title">${isBooleanType ? 'Distribution' : 'Uniqueness'}</span>
+                                </div>
+                                <div class="overview-card__value" style="font-weight: 400;">${isBooleanType ? '82% true' : uniquenessPercentage + '%'}</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">${isBooleanType ? 'Percentage of true values' : 'Percentage of unique values'}</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Value Distribution section -->
+                        <div style="margin-top: var(--space-2);">
+                            <h3 class="body-text-medium" style="margin-bottom: var(--space-3); color: var(--neutral-grey-800);">
+                                ${isBooleanType ? 'Value Distribution' : 'Top 5 Values'}
+                            </h3>
+                            <div style="height: 200px; position: relative;">
+                                <canvas id="topValuesChart-${columnName}"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Find the Statistics card and insert the Distinct Values card after it
+            const statisticsCards = document.querySelectorAll('.card');
+            let insertAfterCard = null;
+            
+            statisticsCards.forEach(card => {
+                const title = card.querySelector('.card__title');
+                if (title && title.textContent.trim() === 'Statistics') {
+                    insertAfterCard = card;
+                }
+            });
+            
+            if (insertAfterCard && insertAfterCard.parentElement) {
+                insertAfterCard.parentElement.insertBefore(distinctValuesCard, insertAfterCard.nextSibling);
+                
+                // Initialize the chart after the card is inserted
+                const canvasId = `topValuesChart-${columnName}`;
+                const topValuesCanvas = document.getElementById(canvasId);
+                
+                if (topValuesCanvas) {
+                    let chartConfig;
+                    
+                    if (isBooleanType) {
+                        // Special configuration for Boolean type
+                        chartConfig = {
+                            type: 'bar',
+                            data: {
+                                labels: ['true', 'false'],
+                                datasets: [{
+                                    label: 'Count',
+                                    data: [trueCount, falseCount],
+                                    backgroundColor: [
+                                        'rgba(75, 210, 110, 0.8)',
+                                        'rgba(235, 87, 87, 0.8)'
+                                    ],
+                                    borderColor: [
+                                        'rgb(75, 210, 110)',
+                                        'rgb(235, 87, 87)'
+                                    ],
+                                    borderWidth: 1,
+                                    barThickness: 40
+                                }]
+                            },
+                            options: {
+                                indexAxis: 'y',
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                const percentage = ((context.raw / totalRecords) * 100).toFixed(1);
+                                                return `${context.raw} records (${percentage}%)`;
+                                            }
+                                        }
+                                    }
+                                },
+                                scales: {
+                                    x: {
+                                        beginAtZero: true,
+                                        grid: {
+                                            display: false
+                                        },
+                                        ticks: {
+                                            font: {
+                                                family: 'Inter'
+                                            }
+                                        }
+                                    },
+                                    y: {
+                                        grid: {
+                                            color: 'rgba(217, 221, 229, 0.5)'
+                                        },
+                                        ticks: {
+                                            font: {
+                                                family: 'Inter'
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        };
+                    } else {
+                        // Original configuration for non-Boolean types
+                        const sampleValues = data.sampleValues.split(', ').slice(0, 5);
+                        let occurrences;
+                        
+                        if (columnName === 'age') {
+                            occurrences = [3245, 4121, 2987, 1567, 538];
+                        } else if (columnName === 'signup_date') {
+                            occurrences = [2456, 3123, 3567, 2234, 1078];
+                        } else {
+                            occurrences = [4876, 3342, 2287, 1215, 738];
+                        }
+                        
+                        chartConfig = {
+                            type: 'bar',
+                            data: {
+                                labels: sampleValues,
+                                datasets: [{
+                                    label: 'Occurrences',
+                                    data: occurrences,
+                                    backgroundColor: 'rgba(31, 143, 255, 0.8)',
+                                    borderColor: 'rgb(31, 143, 255)',
+                                    borderWidth: 1,
+                                    barThickness: 20
+                                }]
+                            },
+                            options: {
+                                indexAxis: 'y',
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                return `${context.raw} occurrences`;
+                                            }
+                                        }
+                                    }
+                                },
+                                scales: {
+                                    x: {
+                                        beginAtZero: true,
+                                        grid: {
+                                            display: false
+                                        },
+                                        ticks: {
+                                            font: {
+                                                family: 'Inter'
+                                            }
+                                        }
+                                    },
+                                    y: {
+                                        grid: {
+                                            color: 'rgba(217, 221, 229, 0.5)'
+                                        },
+                                        ticks: {
+                                            font: {
+                                                family: 'Inter'
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        };
+                    }
+                    
+                    // Create new chart
+                    new Chart(topValuesCanvas, chartConfig);
+                }
+            }
             
             // Update URL with column parameter to enable bookmarking and sharing
             const url = new URL(window.location.href);
@@ -1045,111 +1553,6 @@
             }
         }
         
-        // Update the frequency chart
-        function updateFrequencyChart(columnName, chartData) {
-            const frequencyChartCanvas = document.getElementById('frequencyChart');
-            if (!frequencyChartCanvas) return;
-            
-            // Define labels based on column type
-            let labels;
-            if (columnName === 'status') {
-                labels = ['true', 'false'];
-            } else if (columnName === 'signup_date') {
-                labels = ['2010-2015', '2016-2018', '2019-2020', '2021-2022', '2023'];
-            } else if (columnName === 'age') {
-                labels = ['<20', '20-35', '36-50', '51-65', '>65'];
-            } else if (columnName === 'user_id') {
-                labels = ['10-25', '26-35', '36-45', '46-55', '56-65'];
-            } else if (columnName === 'email' || columnName === 'name') {
-                labels = ['Length ≤10', '10<Length≤20', '20<Length≤30', '30<Length≤40', 'Length>40'];
-            } else {
-                labels = ['Cat 1', 'Cat 2', 'Cat 3', 'Cat 4', 'Cat 5'];
-            }
-            
-            // Destroy existing chart if it exists
-            const existingChart = Chart.getChart(frequencyChartCanvas);
-            if (existingChart) {
-                existingChart.destroy();
-            }
-            
-            // Create new chart
-            new Chart(frequencyChartCanvas, {
-                type: columnName === 'signup_date' ? 'bar' : 'bar',
-                data: {
-                    labels: labels,
-                    datasets: columnName === 'signup_date' ? [
-                        {
-                            data: chartData,
-                            backgroundColor: 'rgba(145, 107, 233, 0.2)',
-                            borderColor: 'rgb(145, 107, 233)',
-                            borderWidth: 1,
-                            barThickness: 15
-                        },
-                        {
-                            type: 'line',
-                            data: chartData,
-                            borderColor: 'rgb(145, 107, 233)',
-                            borderWidth: 2,
-                            pointBackgroundColor: 'rgb(145, 107, 233)',
-                            pointRadius: 4,
-                            tension: 0.3,
-                            fill: false
-                        }
-                    ] : columnName === 'email' || columnName === 'name' ? [{
-                        data: chartData,
-                        backgroundColor: 'rgba(75, 210, 110, 0.8)',
-                        borderColor: 'rgb(75, 210, 110)',
-                        borderWidth: 1,
-                        barThickness: 15
-                    }] : columnName === 'user_id' || columnName === 'age' ? [{
-                        data: chartData,
-                        backgroundColor: 'rgba(31, 143, 255, 0.8)',
-                        borderColor: 'rgb(31, 143, 255)',
-                        borderWidth: 1,
-                        barThickness: 15
-                    }] : [{
-                        data: chartData,
-                        backgroundColor: 'rgba(255, 145, 15, 0.8)',
-                        borderColor: 'rgb(255, 145, 15)',
-                        borderWidth: 1,
-                        barThickness: 15
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return context.raw + ' occurrences';
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            grid: {
-                                display: false
-                            }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            grid: {
-                                color: 'rgba(217, 221, 229, 0.5)'
-                            },
-                            ticks: {
-                                stepSize: 20
-                            }
-                        }
-                    }
-                }
-            });
-        }
-        
         // Function to display table overview
         function selectTableOverview(element) {
             // Update active status in column list
@@ -1190,192 +1593,7 @@
             if (rightPanel) {
                 // Save the original column title
                 const originalTitle = rightPanel.querySelector('#column-title');
-                const titleHtml = originalTitle ? originalTitle.outerHTML : '<h2 class="heading-2" id="column-title" style="padding-bottom: 0;">Table Overview</h2>';
-                
-                // Create overview content with multiple cards
-                rightPanel.innerHTML = `
-                    ${titleHtml}
-                    
-                    <!-- Data Overview Card -->
-                    <div class="card bg-white">
-                        <h2 class="card__title heading-4">Data Summary</h2>
-                        <div class="card__content">
-                            <div style="display: flex; flex-direction: column; gap: var(--space-2);">
-                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                                    <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Number of Columns</span>
-                                    <span class="body-text-medium">6</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                                    <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Number of Rows</span>
-                                    <span class="body-text-medium">12,458</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                                    <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Data Size</span>
-                                    <span class="body-text-medium">4.8 MB</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Quality Metrics Overview -->
-                    <div class="card bg-white">
-                        <h2 class="card__title heading-4">Average Quality Metrics</h2>
-                        <div class="card__content">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);">
-                                <!-- Left column metrics -->
-                                <div style="display: flex; flex-direction: column; gap: var(--space-3);">
-                                    <div>
-                                        <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
-                                            <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Completeness</span>
-                                            <span>94.8%</span>
-                                        </div>
-                                        <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
-                                            <div style="height: 100%; width: 94.8%; background-color: var(--success-green-500-base); border-radius: 4px;"></div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div>
-                                        <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
-                                            <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Validity</span>
-                                            <span>91.2%</span>
-                                        </div>
-                                        <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
-                                            <div style="height: 100%; width: 91.2%; background-color: var(--success-green-500-base); border-radius: 4px;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Right column metrics -->
-                                <div style="display: flex; flex-direction: column; gap: var(--space-3);">
-                                    <div>
-                                        <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
-                                            <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Consistency</span>
-                                            <span>88.5%</span>
-                                        </div>
-                                        <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
-                                            <div style="height: 100%; width: 88.5%; background-color: var(--warning-orange-500-base); border-radius: 4px;"></div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div>
-                                        <div class="body-text-medium" style="margin-bottom: var(--space-2); display: flex; justify-content: space-between;">
-                                            <span style="color: var(--neutral-grey-500-base); font-weight: 400;">Accuracy</span>
-                                            <span>86.7%</span>
-                                        </div>
-                                        <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
-                                            <div style="height: 100%; width: 86.7%; background-color: var(--warning-orange-500-base); border-radius: 4px;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Data Quality Overview -->
-                    <div class="card bg-white">
-                        <h2 class="card__title heading-4">Data Quality Overview</h2>
-                        <div class="card__content">
-                            <div style="display: flex; flex-direction: column; gap: var(--space-2);">
-                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                                    <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Number of Nulls</span>
-                                    <span class="body-text-medium">648 (5.2%)</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                                    <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Number of Duplicates</span>
-                                    <span class="body-text-medium">1,245 (10%)</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                                    <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Number of Variable Types</span>
-                                    <span class="body-text-medium">4</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Column Type Distribution -->
-                    <div class="card bg-white">
-                        <h2 class="card__title heading-4">Column Type Distribution</h2>
-                        <div class="card__content">
-                            <div class="grid grid-cols-2" style="gap: var(--space-4)">
-                                <!-- String Type -->
-                                <div class="overview-card overview-card--grey">
-                                    <div class="overview-card__header">
-                                        <span class="overview-card__title">String</span>
-                                    </div>
-                                    <div class="overview-card__value">2</div>
-                                    <div class="overview-card__subtitle">33% of columns</div>
-                                    <div style="margin-top: var(--space-2);">
-                                        <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
-                                            <div style="height: 100%; width: 33%; background-color: var(--success-green-500-base); border-radius: 4px;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Integer Type -->
-                                <div class="overview-card overview-card--grey">
-                                    <div class="overview-card__header">
-                                        <span class="overview-card__title">Integer</span>
-                                    </div>
-                                    <div class="overview-card__value">2</div>
-                                    <div class="overview-card__subtitle">33% of columns</div>
-                                    <div style="margin-top: var(--space-2);">
-                                        <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
-                                            <div style="height: 100%; width: 33%; background-color: var(--secondary-blue-500-base); border-radius: 4px;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Date Type -->
-                                <div class="overview-card overview-card--grey">
-                                    <div class="overview-card__header">
-                                        <span class="overview-card__title">Date</span>
-                                    </div>
-                                    <div class="overview-card__value">1</div>
-                                    <div class="overview-card__subtitle">17% of columns</div>
-                                    <div style="margin-top: var(--space-2);">
-                                        <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
-                                            <div style="height: 100%; width: 17%; background-color: rgb(145, 107, 233); border-radius: 4px;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Boolean Type -->
-                                <div class="overview-card overview-card--grey">
-                                    <div class="overview-card__header">
-                                        <span class="overview-card__title">Boolean</span>
-                                    </div>
-                                    <div class="overview-card__value">1</div>
-                                    <div class="overview-card__subtitle">17% of columns</div>
-                                    <div style="margin-top: var(--space-2);">
-                                        <div style="height: 8px; background-color: var(--neutral-grey-200); border-radius: 4px;">
-                                            <div style="height: 100%; width: 17%; background-color: var(--warning-orange-500-base); border-radius: 4px;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Profiling Metadata -->
-                    <div class="card bg-white">
-                        <h2 class="card__title heading-4">Profiling Metadata</h2>
-                        <div class="card__content">
-                            <div style="display: flex; flex-direction: column; gap: var(--space-2);">
-                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                                    <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Last Profiled</span>
-                                    <span class="body-text-medium">Feb 12 16:29</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                                    <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Profiled by</span>
-                                    <div style="display: flex; align-items: center; gap: var(--space-2);">
-                                        <div style="width: 24px; height: 24px; border-radius: 50%; background-color: var(--secondary-blue-600); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px;">T</div>
-                                        <span class="body-text-medium">Tomáš Janoušek</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
+                rightPanel.innerHTML = createTableOverviewTemplate(originalTitle);
             }
             
             // Update URL with tableOverview parameter to enable bookmarking and sharing
@@ -1391,9 +1609,6 @@
             Element.prototype.contains = function(text) {
                 return (this.textContent || this.innerText).indexOf(text) > -1;
             };
-            
-            // Initialize frequency chart for the first time
-            updateFrequencyChart('user_id', columnData['user_id'].rangeFrequency.chartData);
             
             // Check URL parameters
             const urlParams = new URLSearchParams(window.location.search);
