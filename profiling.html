@@ -160,12 +160,6 @@
                     </h1>
                 </div>
                 <div class="header__actions">
-                    <button class="btn btn-secondary btn-medium">
-                        <div class="btn-icon">
-                            <i class="fas fa-download icon-muted"></i>
-                        </div>
-                        <span class="btn-text button-text">EXPORT REPORT</span>
-                    </button>
                     <button class="btn btn-primary btn-medium">
                         <div class="btn-icon">
                             <i class="fas fa-play text-white"></i>
@@ -320,6 +314,30 @@
                                         <span>Boolean</span>
                                     </div>
                                 </div>
+                                
+                                <div class="activity-row" style="padding: var(--space-2); border-radius: 4px; cursor: pointer;" onclick="selectColumn('price', 'Float', this)">
+                                    <div class="activity-row__content">
+                                        <div class="icon-container icon-small">
+                                            <i class="fas fa-columns icon-muted"></i>
+                                        </div>
+                                        <span class="activity-row__text">price</span>
+                                    </div>
+                                    <div class="activity-row__meta">
+                                        <span>Float</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-row" style="padding: var(--space-2); border-radius: 4px; cursor: pointer;" onclick="selectColumn('amount', 'Decimal', this)">
+                                    <div class="activity-row__content">
+                                        <div class="icon-container icon-small">
+                                            <i class="fas fa-columns icon-muted"></i>
+                                        </div>
+                                        <span class="activity-row__text">amount</span>
+                                    </div>
+                                    <div class="activity-row__meta">
+                                        <span>Decimal</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -467,8 +485,15 @@
                     number = parseFloat(number);
                 }
                 
-                // Format the number with spaces as thousand separators
-                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+                // Format the number with spaces as thousand separators, but properly handle decimals
+                if (Number.isInteger(number)) {
+                    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+                } else {
+                    // For decimal numbers, split at decimal point and only format the integer part
+                    const parts = number.toString().split('.');
+                    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+                    return parts.join('.');
+                }
             } catch (e) {
                 // Return original value if formatting fails
                 return number;
@@ -632,6 +657,58 @@
                     range: 'Boolean',
                     chartData: [82, 18, 0, 0, 0]
                 }
+            },
+            'price': {
+                properties: {
+                    columnType: 'Float',
+                    distinct: 3458,
+                    duplicates: 9000,
+                    missing: 120
+                },
+                sampleValues: '29.99, 49.99, 19.99, 99.99, 149.99, 9.99, 59.99, 39.99, 79.99, 24.99',
+                outliers: '0.99, 1.99, 499.99, 799.99, 999.99',
+                statistics: {
+                    mean: 74.82,
+                    median: 49.99,
+                    min: 0.99,
+                    max: 999.99
+                },
+                qualityMetrics: {
+                    completeness: 99.0,
+                    validity: 100.0,
+                    consistency: 97.5,
+                    accuracy: 98.3
+                },
+                rangeFrequency: {
+                    range: '0.99-999.99',
+                    chartData: [2491, 4982, 3736, 1245, 4]
+                }
+            },
+            'amount': {
+                properties: {
+                    columnType: 'Decimal',
+                    distinct: 5228,
+                    duplicates: 7230,
+                    missing: 95
+                },
+                sampleValues: '1025.5078, 347.2538, 892.7534, 2456.0012, 1278.5036, 583.2075, 4125.7582, 768.3024, 1567.8056, 912.4037',
+                outliers: '0.2534, 8.5012, 9567.5078, 12500.0045, 15750.2598',
+                statistics: {
+                    mean: 1423.8547,
+                    median: 950.6032,
+                    min: 0.2534,
+                    max: 15750.2598
+                },
+                qualityMetrics: {
+                    completeness: 99.2,
+                    validity: 100.0,
+                    consistency: 98.1,
+                    accuracy: 97.8
+                },
+                rangeFrequency: {
+                    range: '0.2534-15750.2598',
+                    chartData: [2245, 5124, 3245, 1825, 19]
+                }
             }
         };
 
@@ -750,6 +827,17 @@
         function createTableOverviewTemplate(titleElement) {
             const titleHtml = titleElement ? titleElement.outerHTML : '<h2 class="heading-2" id="column-title" style="padding-bottom: 0;">Table Overview</h2>';
             
+            // Count and gather unique attribute types from columnData
+            const attributeTypes = [];
+            Object.values(columnData).forEach(column => {
+                if (column.properties && column.properties.columnType && !attributeTypes.includes(column.properties.columnType)) {
+                    attributeTypes.push(column.properties.columnType);
+                }
+            });
+            
+            const attributeTypeCount = attributeTypes.length;
+            const attributeTypesList = attributeTypes.join(', ');
+            
             return `
                 ${titleHtml}
                 
@@ -763,56 +851,56 @@
                                 <div class="overview-card__header">
                                     <span class="overview-card__title">Columns</span>
                                 </div>
-                                <div class="overview-card__value" style="font-weight: 400;">6</div>
+                                <div class="overview-card__value" style="font-weight: 400;">${Object.keys(columnData).length}</div>
                                 <div class="overview-card__subtitle" style="font-weight: 400;">Total columns in table</div>
                             </div>
                             
-                            <!-- Rows Card -->
+                            <!-- Missing Cells Card -->
                             <div class="overview-card overview-card--grey">
                                 <div class="overview-card__header">
-                                    <span class="overview-card__title">Rows</span>
+                                    <span class="overview-card__title">Missing Cells</span>
                                 </div>
-                                <div class="overview-card__value" style="font-weight: 400;">${formatNumber(12458)}</div>
-                                <div class="overview-card__subtitle" style="font-weight: 400;">Total records</div>
+                                <div class="overview-card__value" style="font-weight: 400;">${formatNumber(648)}</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">${(648 / 12458 * 100).toFixed(1)}% of total values</div>
                             </div>
                             
-                            <!-- Attribute Types Card -->
+                            <!-- Duplicated Records Card -->
                             <div class="overview-card overview-card--grey">
                                 <div class="overview-card__header">
-                                    <span class="overview-card__title">Attribute Types</span>
+                                    <span class="overview-card__title">Duplicated Records</span>
                                 </div>
-                                <div class="overview-card__value" style="font-weight: 400;">4</div>
-                                <div class="overview-card__subtitle" style="font-weight: 400;">String, Integer, Date, Boolean</div>
+                                <div class="overview-card__value" style="font-weight: 400;">${formatNumber(1245)}</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">10% of total records</div>
                             </div>
                             
-                            <!-- Data Size Card -->
+                            <!-- Duplicated Rows Card -->
                             <div class="overview-card overview-card--grey">
                                 <div class="overview-card__header">
-                                    <span class="overview-card__title">Data Size</span>
+                                    <span class="overview-card__title">Duplicated Rows</span>
                                 </div>
-                                <div class="overview-card__value" style="font-weight: 400;">4.8 MB</div>
-                                <div class="overview-card__subtitle" style="font-weight: 400;">Total storage used</div>
+                                <div class="overview-card__value" style="font-weight: 400;">${formatNumber(213)}</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">1.7% of total rows</div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Data Quality Overview -->
+                
+                <!-- Statistics Card -->
                 <div class="card bg-white">
-                    <h2 class="card__title heading-4">Data Quality Overview</h2>
+                    <h2 class="card__title heading-4">Statistics</h2>
                     <div class="card__content">
                         <div style="display: flex; flex-direction: column; gap: var(--space-2);">
                             <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                                <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Missing Cells (Nulls)</span>
-                                <span class="body-text" style="font-weight: 400;">${formatNumber(648)} (5.2%)</span>
+                                <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Rows</span>
+                                <span class="body-text" style="font-weight: 400;">${formatNumber(12458)}</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                                <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Duplicated Records</span>
-                                <span class="body-text" style="font-weight: 400;">${formatNumber(1245)} (10%)</span>
+                                <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Attribute Types</span>
+                                <span class="body-text" style="font-weight: 400;">${attributeTypeCount} (${attributeTypesList})</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                                <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Duplicated Rows</span>
-                                <span class="body-text" style="font-weight: 400;">${formatNumber(213)} (1.7%)</span>
+                                <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Data Size</span>
+                                <span class="body-text" style="font-weight: 400;">4.8 MB</span>
                             </div>
                         </div>
                     </div>
@@ -948,7 +1036,7 @@
             
             // Helper function to update content for Statistics card
             function updateStatisticsCard(data) {
-                const isNumericType = ['Integer', 'Float', 'Number'].includes(data.properties.columnType);
+                const isNumericType = ['Integer', 'Float', 'Decimal', 'Number'].includes(data.properties.columnType);
                 const isStringType = ['String', 'Text', 'Varchar'].includes(data.properties.columnType);
                 const isBooleanType = data.properties.columnType === 'Boolean';
                 const isDateType = data.properties.columnType === 'Date';
@@ -1022,36 +1110,7 @@
                         </div>
                     `;
                     
-                    // Get string patterns based on column content
-                    let patternLabel = "Common Patterns";
-                    let patternCount = "3";
-                    
-                    // For email specifically, count domains
-                    if (columnName === 'email') {
-                        const domains = sampleValues
-                            .map(email => email.split('@')[1])
-                            .filter(domain => domain);
-                        
-                        const uniqueDomains = [...new Set(domains)];
-                        patternLabel = "Unique Domains";
-                        patternCount = formatNumber(uniqueDomains.length);
-                    } else if (columnName === 'name') {
-                        // For name columns, count words
-                        const wordCounts = sampleValues
-                            .map(name => name.split(' ').length)
-                            .filter(count => count);
-                        
-                        const avgWords = Math.round((wordCounts.reduce((a, b) => a + b, 0) / wordCounts.length) * 10) / 10;
-                        patternLabel = "Average Words";
-                        patternCount = avgWords;
-                    }
-                    
-                    statisticsContent += `
-                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
-                            <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">${patternLabel}</span>
-                            <span class="body-text" style="font-weight: 400;">${patternCount}</span>
-                        </div>
-                    `;
+                    // Removed all other string statistics like "Email Pattern", "Average Words", etc.
                 } else if (isNumericType || isBooleanType) {
                     // Numeric and Boolean statistics
                     if (data.statistics.mean !== undefined && data.statistics.mean !== null && 
@@ -1064,6 +1123,14 @@
                             </div>
                         `;
                     }
+                    
+                    // Add Mode (Modus) for numeric types - we'll calculate from sample values or use a placeholder
+                    statisticsContent += `
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
+                            <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Modus</span>
+                            <span class="body-text" style="font-weight: 400;">${formatNumber(calculateModus(data))}</span>
+                        </div>
+                    `;
                     
                     if (data.statistics.median !== undefined && data.statistics.median !== null && 
                         data.statistics.median !== 'N/A' && data.statistics.median !== 'N/A (non-numeric data)' && 
@@ -1119,7 +1186,7 @@
                     }
                 });
                 
-                const isNumericType = ['Integer', 'Float', 'Number'].includes(data.properties.columnType);
+                const isNumericType = ['Integer', 'Float', 'Decimal', 'Number'].includes(data.properties.columnType);
                 const hasOutliers = data.outliers && !isNA(data.outliers) && data.outliers !== 'N/A (boolean data)' && data.outliers !== 'N/A (non-numeric data)';
                 
                 // Remove the card if it exists and shouldn't be shown
@@ -1290,9 +1357,15 @@
             // For Boolean type, calculate true/false distribution
             let trueCount = 0;
             let falseCount = 0;
+            let nullCount = 0;
             if (isBooleanType) {
                 trueCount = Math.round(totalRecords * 0.82); // 82% true from the mean
-                falseCount = totalRecords - trueCount - data.properties.missing;
+                nullCount = data.properties.missing; // Get actual missing count
+                falseCount = totalRecords - trueCount - nullCount;
+                
+                // Calculate percentages 
+                const truePercentOfAll = ((trueCount / totalRecords) * 100).toFixed(1);
+                const truePercentOfNonNull = ((trueCount / (totalRecords - nullCount)) * 100).toFixed(1);
             }
             
             distinctValuesCard.innerHTML = `
@@ -1305,19 +1378,48 @@
                                 <div class="overview-card__header">
                                     <span class="overview-card__title">Distinct Count</span>
                                 </div>
-                                <div class="overview-card__value" style="font-weight: 400;">${formatNumber(distinctCount)}</div>
+                                <div class="overview-card__value" style="font-weight: 400;">${formatNumber(distinctCount)}${isBooleanType ? ' + nulls' : ''}</div>
                                 <div class="overview-card__subtitle" style="font-weight: 400;">${isBooleanType ? 'true/false values' : 'Unique values in column'}</div>
                             </div>
                             
                             <!-- Distribution Card for Boolean -->
                             <div class="overview-card overview-card--grey">
                                 <div class="overview-card__header">
-                                    <span class="overview-card__title">${isBooleanType ? 'Distribution' : 'Uniqueness'}</span>
+                                    <span class="overview-card__title">${isBooleanType ? 'Distribution (All)' : 'Uniqueness'}</span>
                                 </div>
-                                <div class="overview-card__value" style="font-weight: 400;">${isBooleanType ? '82% true' : uniquenessPercentage + '%'}</div>
-                                <div class="overview-card__subtitle" style="font-weight: 400;">${isBooleanType ? 'Percentage of true values' : 'Percentage of unique values'}</div>
+                                <div class="overview-card__value" style="font-weight: 400;">${isBooleanType ? ((trueCount / totalRecords) * 100).toFixed(1) + '% true' : uniquenessPercentage + '%'}</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">${isBooleanType ? 'Percentage of true values (including nulls)' : 'Percentage of unique values'}</div>
                             </div>
                         </div>
+                        
+                        <!-- Distribution of non-null values for Boolean -->
+                        ${isBooleanType ? `
+                        <div class="grid grid-cols-2" style="gap: var(--space-4)">
+                            <div class="overview-card overview-card--grey">
+                                <div class="overview-card__header">
+                                    <span class="overview-card__title">Distribution (Non-null)</span>
+                                </div>
+                                <div class="overview-card__value" style="font-weight: 400;">${((trueCount / (totalRecords - nullCount)) * 100).toFixed(1)}% true</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">Percentage of true values (excluding nulls)</div>
+                            </div>
+                            
+                            <div class="overview-card overview-card--grey">
+                                <div class="overview-card__header">
+                                    <span class="overview-card__title">Missing Values</span>
+                                </div>
+                                <div class="overview-card__value" style="font-weight: 400;">${formatNumber(nullCount)}</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">Count of null values</div>
+                            </div>
+                            
+                            <div class="overview-card overview-card--grey">
+                                <div class="overview-card__header">
+                                    <span class="overview-card__title">Missing Percentage</span>
+                                </div>
+                                <div class="overview-card__value" style="font-weight: 400;">${((nullCount / totalRecords) * 100).toFixed(1)}%</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">Percentage of null values</div>
+                            </div>
+                        </div>
+                        ` : ''}
                         
                         <!-- Value Distribution section -->
                         <div style="margin-top: var(--space-2);">
@@ -1358,17 +1460,19 @@
                         chartConfig = {
                             type: 'bar',
                             data: {
-                                labels: ['true', 'false'],
+                                labels: ['true', 'false', 'null'],
                                 datasets: [{
                                     label: 'Count',
-                                    data: [trueCount, falseCount],
+                                    data: [trueCount, falseCount, nullCount],
                                     backgroundColor: [
                                         'rgba(75, 210, 110, 0.8)',
-                                        'rgba(235, 87, 87, 0.8)'
+                                        'rgba(235, 87, 87, 0.8)',
+                                        'rgba(189, 189, 189, 0.8)'
                                     ],
                                     borderColor: [
                                         'rgb(75, 210, 110)',
-                                        'rgb(235, 87, 87)'
+                                        'rgb(235, 87, 87)',
+                                        'rgb(189, 189, 189)'
                                     ],
                                     borderWidth: 1,
                                     barThickness: 40
@@ -1425,20 +1529,37 @@
                         let occurrences;
                         
                         if (columnName === 'age') {
-                            occurrences = [3245, 4121, 2987, 1567, 538];
+                            occurrences = [4121, 3245, 2987, 1567, 538];
                         } else if (columnName === 'signup_date') {
-                            occurrences = [2456, 3123, 3567, 2234, 1078];
+                            occurrences = [3567, 3123, 2456, 2234, 1078];
+                        } else if (columnName === 'price') {
+                            occurrences = [4876, 3342, 2287, 1215, 738];
+                        } else if (columnName === 'amount') {
+                            occurrences = [5124, 3245, 2245, 1825, 19];
                         } else {
                             occurrences = [4876, 3342, 2287, 1215, 738];
                         }
                         
+                        // Create arrays of sample values and their occurrences, then sort by occurrences
+                        const valueOccurrencePairs = sampleValues.map((value, index) => ({
+                            value: value,
+                            occurrence: occurrences[index] || 0
+                        }));
+                        
+                        // Sort by occurrence in descending order
+                        valueOccurrencePairs.sort((a, b) => b.occurrence - a.occurrence);
+                        
+                        // Extract the sorted values and occurrences
+                        const sortedValues = valueOccurrencePairs.map(pair => pair.value);
+                        const sortedOccurrences = valueOccurrencePairs.map(pair => pair.occurrence);
+                        
                         chartConfig = {
                             type: 'bar',
                             data: {
-                                labels: sampleValues,
+                                labels: sortedValues,
                                 datasets: [{
                                     label: 'Occurrences',
-                                    data: occurrences,
+                                    data: sortedOccurrences,
                                     backgroundColor: 'rgba(31, 143, 255, 0.8)',
                                     borderColor: 'rgb(31, 143, 255)',
                                     borderWidth: 1,
@@ -1748,6 +1869,35 @@
                 });
             });
         });
+
+        // Helper function to calculate the mode (modus) from the data
+        function calculateModus(data) {
+            // For each data type, return an appropriate mode value
+            const columnType = data.properties.columnType;
+            
+            if (columnType === 'Integer') {
+                // For user_id, return a common value
+                if (data.sampleValues.includes('10 001')) return 10001;
+                // For age, 35 is a common age
+                if (data.sampleValues.includes('25')) return 35;
+                // Default for other integer columns
+                return 42;
+            } else if (columnType === 'Float') {
+                return 49.99;
+            } else if (columnType === 'Decimal') {
+                return 1025.5078;
+            } else if (columnType === 'String') {
+                if (data.sampleValues.includes('john.doe@company.com')) return 'john.doe@company.com';
+                if (data.sampleValues.includes('John Smith')) return 'John Smith';
+                return 'Common Value';
+            } else if (columnType === 'Boolean') {
+                return 'true';
+            } else if (columnType === 'Date') {
+                return '2024-02-15';
+            }
+            
+            return 'N/A';
+        }
     </script>
 </body>
 </html> 
