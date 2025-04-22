@@ -1263,45 +1263,71 @@
             }
             
             // Update Properties card
-            updateCardContent('Properties', `
-                <div class="grid grid-cols-2" style="gap: var(--space-4)">
-                    <!-- Column Type Card -->
-                    <div class="overview-card overview-card--grey">
-                        <div class="overview-card__header">
-                            <span class="overview-card__title">Column Type</span>
+            if (data.properties.columnType === 'Boolean') {
+                // For Boolean columns, only show Column Type and Missing Values
+                updateCardContent('Properties', `
+                    <div class="grid grid-cols-2" style="gap: var(--space-4)">
+                        <!-- Column Type Card -->
+                        <div class="overview-card overview-card--grey">
+                            <div class="overview-card__header">
+                                <span class="overview-card__title">Column Type</span>
+                            </div>
+                            <div class="overview-card__value" style="font-weight: 400;">${data.properties.columnType}</div>
+                            <div class="overview-card__subtitle" style="font-weight: 400;">Data type of column</div>
                         </div>
-                        <div class="overview-card__value" style="font-weight: 400;">${data.properties.columnType}</div>
-                        <div class="overview-card__subtitle" style="font-weight: 400;">Data type of column</div>
-                    </div>
-                    
-                    <!-- Distinct Values Card -->
-                    <div class="overview-card overview-card--grey">
-                        <div class="overview-card__header">
-                            <span class="overview-card__title">Distinct Values</span>
+                        
+                        <!-- Missing Values Card -->
+                        <div class="overview-card overview-card--grey">
+                            <div class="overview-card__header">
+                                <span class="overview-card__title">Missing Values</span>
+                            </div>
+                            <div class="overview-card__value" style="font-weight: 400;">${formatNumber(data.properties.missing)}</div>
+                            <div class="overview-card__subtitle" style="font-weight: 400;">Count of null values</div>
                         </div>
-                        <div class="overview-card__value" style="font-weight: 400;">${formatNumber(data.properties.distinct)}</div>
-                        <div class="overview-card__subtitle" style="font-weight: 400;">Unique values count</div>
                     </div>
-                    
-                    <!-- Duplicate Values Card -->
-                    <div class="overview-card overview-card--grey">
-                        <div class="overview-card__header">
-                            <span class="overview-card__title">Duplicate Values</span>
+                `);
+            } else {
+                // For non-Boolean columns, show all four cards
+                updateCardContent('Properties', `
+                    <div class="grid grid-cols-2" style="gap: var(--space-4)">
+                        <!-- Column Type Card -->
+                        <div class="overview-card overview-card--grey">
+                            <div class="overview-card__header">
+                                <span class="overview-card__title">Column Type</span>
+                            </div>
+                            <div class="overview-card__value" style="font-weight: 400;">${data.properties.columnType}</div>
+                            <div class="overview-card__subtitle" style="font-weight: 400;">Data type of column</div>
                         </div>
-                        <div class="overview-card__value" style="font-weight: 400;">${formatNumber(data.properties.duplicates)}</div>
-                        <div class="overview-card__subtitle" style="font-weight: 400;">Number of duplicated values</div>
-                    </div>
-                    
-                    <!-- Missing Values Card -->
-                    <div class="overview-card overview-card--grey">
-                        <div class="overview-card__header">
-                            <span class="overview-card__title">Missing Values</span>
+                        
+                        <!-- Distinct Values Card -->
+                        <div class="overview-card overview-card--grey">
+                            <div class="overview-card__header">
+                                <span class="overview-card__title">Distinct Values</span>
+                            </div>
+                            <div class="overview-card__value" style="font-weight: 400;">${formatNumber(data.properties.distinct)}</div>
+                            <div class="overview-card__subtitle" style="font-weight: 400;">Unique values count</div>
                         </div>
-                        <div class="overview-card__value" style="font-weight: 400;">${formatNumber(data.properties.missing)}</div>
-                        <div class="overview-card__subtitle" style="font-weight: 400;">Count of null values</div>
+                        
+                        <!-- Duplicate Values Card -->
+                        <div class="overview-card overview-card--grey">
+                            <div class="overview-card__header">
+                                <span class="overview-card__title">Duplicate Values</span>
+                            </div>
+                            <div class="overview-card__value" style="font-weight: 400;">${formatNumber(data.properties.duplicates)}</div>
+                            <div class="overview-card__subtitle" style="font-weight: 400;">Number of duplicated values</div>
+                        </div>
+                        
+                        <!-- Missing Values Card -->
+                        <div class="overview-card overview-card--grey">
+                            <div class="overview-card__header">
+                                <span class="overview-card__title">Missing Values</span>
+                            </div>
+                            <div class="overview-card__value" style="font-weight: 400;">${formatNumber(data.properties.missing)}</div>
+                            <div class="overview-card__subtitle" style="font-weight: 400;">Count of null values</div>
+                        </div>
                     </div>
-                </div>
-            `);
+                `);
+            }
             
             // Update Sample Values card
             if (data.properties.columnType === 'Boolean') {
@@ -1373,53 +1399,62 @@
                 <div class="card__content">
                     <div style="display: flex; flex-direction: column; gap: var(--space-4);">
                         <div class="grid grid-cols-2" style="gap: var(--space-4)">
-                            <!-- Distinct Count Card -->
+                            ${isBooleanType ? `
+                            <!-- Value Distribution Card -->
                             <div class="overview-card overview-card--grey">
                                 <div class="overview-card__header">
-                                    <span class="overview-card__title">Distinct Count</span>
+                                    <span class="overview-card__title">Value Distribution</span>
                                 </div>
-                                <div class="overview-card__value" style="font-weight: 400;">${formatNumber(distinctCount)}${isBooleanType ? ' + nulls' : ''}</div>
-                                <div class="overview-card__subtitle" style="font-weight: 400;">${isBooleanType ? 'true/false values' : 'Unique values in column'}</div>
+                                <div class="overview-card__value" style="font-weight: 400;">${((trueCount / totalRecords) * 100).toFixed(1)}% true<br>${((falseCount / totalRecords) * 100).toFixed(1)}% false</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">Distribution of all values</div>
                             </div>
                             
-                            <!-- Distribution Card for Boolean -->
+                            <!-- Total Records Card -->
                             <div class="overview-card overview-card--grey">
                                 <div class="overview-card__header">
-                                    <span class="overview-card__title">${isBooleanType ? 'Distribution (All)' : 'Uniqueness'}</span>
+                                    <span class="overview-card__title">Total Records</span>
                                 </div>
-                                <div class="overview-card__value" style="font-weight: 400;">${isBooleanType ? ((trueCount / totalRecords) * 100).toFixed(1) + '% true' : uniquenessPercentage + '%'}</div>
-                                <div class="overview-card__subtitle" style="font-weight: 400;">${isBooleanType ? 'Percentage of true values (including nulls)' : 'Percentage of unique values'}</div>
+                                <div class="overview-card__value" style="font-weight: 400;">${formatNumber(totalRecords)}</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">Number of records</div>
                             </div>
-                        </div>
-                        
-                        <!-- Distribution of non-null values for Boolean -->
-                        ${isBooleanType ? `
-                        <div class="grid grid-cols-2" style="gap: var(--space-4)">
-                            <div class="overview-card overview-card--grey">
-                                <div class="overview-card__header">
-                                    <span class="overview-card__title">Distribution (Non-null)</span>
-                                </div>
-                                <div class="overview-card__value" style="font-weight: 400;">${((trueCount / (totalRecords - nullCount)) * 100).toFixed(1)}% true</div>
-                                <div class="overview-card__subtitle" style="font-weight: 400;">Percentage of true values (excluding nulls)</div>
-                            </div>
-                            
+
+                            <!-- Missing Values Card -->
                             <div class="overview-card overview-card--grey">
                                 <div class="overview-card__header">
                                     <span class="overview-card__title">Missing Values</span>
                                 </div>
-                                <div class="overview-card__value" style="font-weight: 400;">${formatNumber(nullCount)}</div>
-                                <div class="overview-card__subtitle" style="font-weight: 400;">Count of null values</div>
+                                <div class="overview-card__value" style="font-weight: 400;">${formatNumber(nullCount)} (${((nullCount / totalRecords) * 100).toFixed(1)}%)</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">Count and percentage of nulls</div>
                             </div>
-                            
+
+                            <!-- Valid Data Card -->
                             <div class="overview-card overview-card--grey">
                                 <div class="overview-card__header">
-                                    <span class="overview-card__title">Missing Percentage</span>
+                                    <span class="overview-card__title">Valid Data</span>
                                 </div>
-                                <div class="overview-card__value" style="font-weight: 400;">${((nullCount / totalRecords) * 100).toFixed(1)}%</div>
-                                <div class="overview-card__subtitle" style="font-weight: 400;">Percentage of null values</div>
+                                <div class="overview-card__value" style="font-weight: 400;">${((1 - nullCount / totalRecords) * 100).toFixed(1)}%</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">Percentage of non-null values</div>
                             </div>
+                            ` : `
+                            <!-- Regular Distinct Count Card -->
+                            <div class="overview-card overview-card--grey">
+                                <div class="overview-card__header">
+                                    <span class="overview-card__title">Distinct Count</span>
+                                </div>
+                                <div class="overview-card__value" style="font-weight: 400;">${formatNumber(distinctCount)}</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">Unique values in column</div>
+                            </div>
+                            
+                            <!-- Regular Uniqueness Card -->
+                            <div class="overview-card overview-card--grey">
+                                <div class="overview-card__header">
+                                    <span class="overview-card__title">Uniqueness</span>
+                                </div>
+                                <div class="overview-card__value" style="font-weight: 400;">${uniquenessPercentage}%</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">Percentage of unique values</div>
+                            </div>
+                            `}
                         </div>
-                        ` : ''}
                         
                         <!-- Value Distribution section -->
                         <div style="margin-top: var(--space-2);">
