@@ -72,6 +72,97 @@
             object-fit: cover;
             border-radius: 50%;
         }
+        
+        /* Toggle switch style */
+        .switch {
+            display: inline-flex;
+            align-items: center;
+            width: 32px;
+            height: 20px;
+            position: relative;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            right: 0;
+            width: 32px;
+            height: 16px;
+            background-color: var(--neutral-grey-200);
+            transition: .3s;
+        }
+        
+        .slider.round {
+            border-radius: 34px;
+        }
+        
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 12px;
+            width: 12px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .3s;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--success-green-500-base);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(16px);
+        }
+        
+        /* Tooltip style */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 240px;
+            background-color: var(--neutral-grey-800);
+            color: white;
+            text-align: left;
+            border-radius: 4px;
+            padding: 12px 16px;
+            font-family: var(--body-body-family);
+            font-size: var(--body-body-size);
+            font-weight: var(--body-body-weight);
+            line-height: var(--body-body-line-height);
+            
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 100;
+            bottom: 100%;
+            right: 0;
+            margin-bottom: 5px;
+            
+            /* Fade in effect */
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="bg-grey-50">
@@ -169,43 +260,59 @@
                 </div>
             </header>
             
-            <!-- Main Navigation Tabs -->
-            <div class="tabs tabs-large">
-                <div class="tab-item">
-                    <div class="tab-content">
-                        <div class="tab-text body-text-medium">Overview</div>
+            <!-- Main Navigation Tabs Wrapper -->
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--neutral-grey-200); position: relative;">
+                <!-- Original Tabs Component -->
+                <div class="tabs tabs-large" style="border-bottom: none;">
+                    <div class="tab-item">
+                        <div class="tab-content">
+                            <div class="tab-text body-text-medium">Overview</div>
+                        </div>
+                        <div class="tab-active-line"></div>
                     </div>
-                    <div class="tab-active-line"></div>
+                    <div class="tab-item">
+                        <div class="tab-content">
+                            <div class="tab-text body-text-medium">Schema</div>
+                        </div>
+                        <div class="tab-active-line"></div>
+                    </div>
+                    <div class="tab-item active">
+                        <div class="tab-content">
+                            <div class="tab-text body-text-medium">Profiling</div>
+                        </div>
+                        <div class="tab-active-line"></div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-content">
+                            <div class="tab-text body-text-medium">Events</div>
+                        </div>
+                        <div class="tab-active-line"></div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-content">
+                            <div class="tab-text body-text-medium">Snapshots</div>
+                        </div>
+                        <div class="tab-active-line"></div>
+                    </div>
+                    <div class="tab-item">
+                        <div class="tab-content">
+                            <div class="tab-text body-text-medium">Usage</div>
+                        </div>
+                        <div class="tab-active-line"></div>
+                    </div>
                 </div>
-                <div class="tab-item">
-                    <div class="tab-content">
-                        <div class="tab-text body-text-medium">Schema</div>
+                
+                <!-- Auto-Profile Toggle Switch -->
+                <div style="display: flex; align-items: flex-start; gap: var(--space-2); height: 40px;">
+                    <label class="switch" style="position: relative; top: 0;">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="body-text" style="font-weight: 400;">Perform Profile on Every Load</span>
+                    <div class="icon-container icon-small tooltip">
+                        <i class="fas fa-info-circle icon-muted"></i>
+                        <span class="tooltiptext">Automatically run data profiling each time table data is loaded/updated</span>
                     </div>
-                    <div class="tab-active-line"></div>
-                </div>
-                <div class="tab-item active">
-                    <div class="tab-content">
-                        <div class="tab-text body-text-medium">Profiling</div>
-                    </div>
-                    <div class="tab-active-line"></div>
-                </div>
-                <div class="tab-item">
-                    <div class="tab-content">
-                        <div class="tab-text body-text-medium">Events</div>
-                    </div>
-                    <div class="tab-active-line"></div>
-                </div>
-                <div class="tab-item">
-                    <div class="tab-content">
-                        <div class="tab-text body-text-medium">Snapshots</div>
-                    </div>
-                    <div class="tab-active-line"></div>
-                </div>
-                <div class="tab-item">
-                    <div class="tab-content">
-                        <div class="tab-text body-text-medium">Usage</div>
-                    </div>
-                    <div class="tab-active-line"></div>
                 </div>
             </div>
             
