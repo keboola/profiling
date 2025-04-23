@@ -454,22 +454,20 @@
                         <!-- Column Title -->
                         <h2 class="heading-2" id="column-title" style="padding-bottom: 0;">user_id</h2>
                         
-                        <!-- Detected Issues Banner with Title -->
-                        <div class="banner style-variant-secondary">
-                            <div class="icon-container icon-small">
-                                <i class="fas fa-info-circle" style="color: var(--secondary-blue-600);"></i>
-                            </div>
-                            <div class="content">
-                                <div class="title body-text-medium">Column Insights</div>
-                                <div class="text body-text">Outliers in <strong>user_id</strong> column (5 values), missing values in multiple columns (563 records)</div>
-                            </div>
-                        </div>
-                        
                         <!-- Properties -->
                         <div class="card bg-white">
                             <h2 class="card__title heading-4">Properties</h2>
                             <div class="card__content">
                                 <div class="grid grid-cols-2" style="gap: var(--space-4)">
+                                    <!-- Total Records Card -->
+                                    <div class="overview-card overview-card--grey">
+                                        <div class="overview-card__header">
+                                            <span class="overview-card__title">Total Records</span>
+                                        </div>
+                                        <div class="overview-card__value" style="font-weight: 400;">12 458</div>
+                                        <div class="overview-card__subtitle" style="font-weight: 400;">Number of records</div>
+                                    </div>
+                                    
                                     <!-- Column Type Card -->
                                     <div class="overview-card overview-card--grey">
                                         <div class="overview-card__header">
@@ -574,6 +572,9 @@
     </div>
 
     <script>
+        // Define a constant for total records
+        const TOTAL_RECORDS = 12458;
+        
         // Helper function to format numbers with spaces between thousands
         function formatNumber(number) {
             if (number === undefined || number === null || number === '' || 
@@ -612,9 +613,10 @@
             'user_id': {
                 properties: {
                     columnType: 'Integer',
-                    distinct: 12458,
+                    distinct: TOTAL_RECORDS,
                     duplicates: 0,
-                    missing: 0
+                    missing: 0,
+                    recordCount: TOTAL_RECORDS // Non-missing records
                 },
                 sampleValues: '10 001, 10 002, 10 003, 10 004, 10 005, 10 006, 10 007, 10 008, 10 009, 10 010',
                 outliers: '20 455, 20 456, 20 457, 20 458, 20 459',
@@ -640,7 +642,8 @@
                     columnType: 'String',
                     distinct: 12245,
                     duplicates: 213,
-                    missing: 124
+                    missing: 124,
+                    recordCount: TOTAL_RECORDS - 124 // Non-missing records
                 },
                 sampleValues: 'john.doe@company.com, alice.smith@email.net, robert.jones@domain.org, sarah.wilson@mail.com',
                 outliers: 'N/A (non-numeric data)',
@@ -666,7 +669,8 @@
                     columnType: 'String',
                     distinct: 11245,
                     duplicates: 1213,
-                    missing: 89
+                    missing: 89,
+                    recordCount: TOTAL_RECORDS - 89 // Non-missing records
                 },
                 sampleValues: 'John Smith, Alice Johnson, Robert Wilson, Sarah Davis, Michael Brown',
                 outliers: 'N/A (non-numeric data)',
@@ -692,7 +696,8 @@
                     columnType: 'Integer',
                     distinct: 82,
                     duplicates: 12376,
-                    missing: 156
+                    missing: 156,
+                    recordCount: TOTAL_RECORDS - 156 // Non-missing records
                 },
                 sampleValues: '25, 31, 42, 28, 35, 47, 39, 33, 51, 29',
                 outliers: '14, 15, 92, 95, 97',
@@ -718,7 +723,8 @@
                     columnType: 'Date',
                     distinct: 892,
                     duplicates: 11566,
-                    missing: 279
+                    missing: 279,
+                    recordCount: TOTAL_RECORDS - 279 // Non-missing records
                 },
                 sampleValues: '2024-02-15, 2024-02-14, 2024-02-13, 2024-02-12, 2024-02-11',
                 outliers: '2020-01-12, 2020-02-23',
@@ -744,7 +750,8 @@
                     columnType: 'Boolean',
                     distinct: 2,
                     duplicates: 12456,
-                    missing: 53
+                    missing: 53,
+                    recordCount: TOTAL_RECORDS - 53 // Non-missing records
                 },
                 sampleValues: 'true, false, true, true, false',
                 outliers: 'N/A (boolean data)',
@@ -770,7 +777,8 @@
                     columnType: 'Float',
                     distinct: 3458,
                     duplicates: 9000,
-                    missing: 120
+                    missing: 120,
+                    recordCount: TOTAL_RECORDS - 120 // Non-missing records
                 },
                 sampleValues: '29.99, 49.99, 19.99, 99.99, 149.99, 9.99, 59.99, 39.99, 79.99, 24.99',
                 outliers: '0.99, 1.99, 499.99, 799.99, 999.99',
@@ -796,7 +804,8 @@
                     columnType: 'Decimal',
                     distinct: 5228,
                     duplicates: 7230,
-                    missing: 95
+                    missing: 95,
+                    recordCount: TOTAL_RECORDS - 95 // Non-missing records
                 },
                 sampleValues: '1025.5078, 347.2538, 892.7534, 2456.0012, 1278.5036, 583.2075, 4125.7582, 768.3024, 1567.8056, 912.4037',
                 outliers: '0.2534, 8.5012, 9567.5078, 12500.0045, 15750.2598',
@@ -824,15 +833,7 @@
             return `
                 <h2 class="heading-2" id="column-title" style="padding-bottom: 0;">${columnName}</h2>
                 
-                <div class="banner style-variant-secondary">
-                    <div class="icon-container icon-small">
-                        <i class="fas fa-info-circle" style="color: var(--secondary-blue-600);"></i>
-                    </div>
-                    <div class="content">
-                        <div class="title body-text-medium">Column Insights</div>
-                        <div class="text body-text"></div>
-                    </div>
-                </div>
+                <!-- Banner removed as requested -->
                 
                 <div class="card bg-white">
                     <h2 class="card__title heading-4">Properties</h2>
@@ -911,7 +912,7 @@
                                     <div class="overview-card__header">
                                         <span class="overview-card__title">Uniqueness</span>
                                     </div>
-                                    <div class="overview-card__value" style="font-weight: 400;">${data ? ((data.properties.distinct / 12458) * 100).toFixed(1) : ''}%</div>
+                                    <div class="overview-card__value" style="font-weight: 400;">${data ? ((data.properties.distinct / TOTAL_RECORDS) * 100).toFixed(1) : ''}%</div>
                                     <div class="overview-card__subtitle" style="font-weight: 400;">Percentage of unique values</div>
                                 </div>
                             </div>
@@ -944,6 +945,8 @@
             
             const attributeTypeCount = attributeTypes.length;
             const attributeTypesList = attributeTypes.join(', ');
+            const columnCount = Object.keys(columnData).length;
+            const totalCells = TOTAL_RECORDS * columnCount;
             
             return `
                 ${titleHtml}
@@ -952,13 +955,22 @@
                 <div class="card bg-white">
                     <h2 class="card__title heading-4">Data Summary</h2>
                     <div class="card__content">
+                        <!-- Total Records Card - Full Width -->
+                        <div class="overview-card overview-card--grey">
+                            <div class="overview-card__header">
+                                <span class="overview-card__title">Total Records</span>
+                            </div>
+                            <div class="overview-card__value" style="font-size: 32px; line-height: 40px; font-weight: 400;">${formatNumber(totalCells)}</div>
+                            <div class="overview-card__subtitle" style="font-weight: 400;">${formatNumber(TOTAL_RECORDS)} rows × ${columnCount} columns</div>
+                        </div>
+                        
                         <div class="grid grid-cols-2" style="gap: var(--space-4)">
                             <!-- Columns Card -->
                             <div class="overview-card overview-card--grey">
                                 <div class="overview-card__header">
                                     <span class="overview-card__title">Columns</span>
                                 </div>
-                                <div class="overview-card__value" style="font-weight: 400;">${Object.keys(columnData).length}</div>
+                                <div class="overview-card__value" style="font-weight: 400;">${columnCount}</div>
                                 <div class="overview-card__subtitle" style="font-weight: 400;">Total columns in table</div>
                             </div>
                             
@@ -968,7 +980,7 @@
                                     <span class="overview-card__title">Missing Cells</span>
                                 </div>
                                 <div class="overview-card__value" style="font-weight: 400;">${formatNumber(648)}</div>
-                                <div class="overview-card__subtitle" style="font-weight: 400;">${(648 / 12458 * 100).toFixed(1)}% of total values</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">${(648 / totalCells * 100).toFixed(1)}% of total values</div>
                             </div>
                             
                             <!-- Duplicated Records Card -->
@@ -999,7 +1011,7 @@
                         <div style="display: flex; flex-direction: column; gap: var(--space-2);">
                             <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
                                 <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Rows</span>
-                                <span class="body-text" style="font-weight: 400;">${formatNumber(12458)}</span>
+                                <span class="body-text" style="font-weight: 400;">${formatNumber(TOTAL_RECORDS)}</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-1);">
                                 <span class="body-text-medium" style="color: var(--neutral-grey-500-base); font-weight: 400;">Attribute Types</span>
@@ -1373,6 +1385,15 @@
             if (data.properties.columnType === 'Boolean') {
                 // For Boolean columns, only show Column Type and Missing Values
                 updateCardContent('Properties', `
+                    <!-- Total Records Card - Full Width -->
+                    <div class="overview-card overview-card--grey">
+                        <div class="overview-card__header">
+                            <span class="overview-card__title">Valid Values</span>
+                        </div>
+                        <div class="overview-card__value" style="font-size: 32px; line-height: 40px; font-weight: 400;">${formatNumber(data.properties.recordCount)}</div>
+                        <div class="overview-card__subtitle" style="font-weight: 400;">Number of non-null values</div>
+                    </div>
+                    
                     <div class="grid grid-cols-2" style="gap: var(--space-4)">
                         <!-- Column Type Card -->
                         <div class="overview-card overview-card--grey">
@@ -1396,6 +1417,15 @@
             } else {
                 // For non-Boolean columns, show all four cards
                 updateCardContent('Properties', `
+                    <!-- Total Records Card - Full Width -->
+                    <div class="overview-card overview-card--grey">
+                        <div class="overview-card__header">
+                            <span class="overview-card__title">Valid Values</span>
+                        </div>
+                        <div class="overview-card__value" style="font-size: 32px; line-height: 40px; font-weight: 400;">${formatNumber(data.properties.recordCount)}</div>
+                        <div class="overview-card__subtitle" style="font-weight: 400;">Number of non-null values</div>
+                    </div>
+                    
                     <div class="grid grid-cols-2" style="gap: var(--space-4)">
                         <!-- Column Type Card -->
                         <div class="overview-card overview-card--grey">
@@ -1483,46 +1513,46 @@
             
             // Special handling for Boolean type
             const isBooleanType = data.properties.columnType === 'Boolean';
-            const totalRecords = 12458;
+            const totalRecords = TOTAL_RECORDS;
             const distinctCount = data.properties.distinct;
-            const uniquenessPercentage = ((distinctCount / totalRecords) * 100).toFixed(1);
+            const uniquenessPercentage = ((distinctCount / TOTAL_RECORDS) * 100).toFixed(1);
             
             // For Boolean type, calculate true/false distribution
             let trueCount = 0;
             let falseCount = 0;
             let nullCount = 0;
             if (isBooleanType) {
-                trueCount = Math.round(totalRecords * 0.82); // 82% true from the mean
+                trueCount = Math.round(TOTAL_RECORDS * 0.82); // 82% true from the mean
                 nullCount = data.properties.missing; // Get actual missing count
-                falseCount = totalRecords - trueCount - nullCount;
+                falseCount = TOTAL_RECORDS - trueCount - nullCount;
                 
                 // Calculate percentages 
-                const truePercentOfAll = ((trueCount / totalRecords) * 100).toFixed(1);
-                const truePercentOfNonNull = ((trueCount / (totalRecords - nullCount)) * 100).toFixed(1);
+                const truePercentOfAll = ((trueCount / TOTAL_RECORDS) * 100).toFixed(1);
+                const truePercentOfNonNull = ((trueCount / (TOTAL_RECORDS - nullCount)) * 100).toFixed(1);
             }
             
             distinctValuesCard.innerHTML = `
                 <h2 class="card__title heading-4">Distinct Values</h2>
                 <div class="card__content">
                     <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+                        ${isBooleanType ? `
                         <div class="grid grid-cols-2" style="gap: var(--space-4)">
-                            ${isBooleanType ? `
-                            <!-- Value Distribution Card -->
+                            <!-- True Values Card -->
                             <div class="overview-card overview-card--grey">
                                 <div class="overview-card__header">
-                                    <span class="overview-card__title">Value Distribution</span>
+                                    <span class="overview-card__title">True Values</span>
                                 </div>
-                                <div class="overview-card__value" style="font-weight: 400;">${((trueCount / totalRecords) * 100).toFixed(1)}% true<br>${((falseCount / totalRecords) * 100).toFixed(1)}% false</div>
-                                <div class="overview-card__subtitle" style="font-weight: 400;">Distribution of all values</div>
+                                <div class="overview-card__value" style="font-weight: 400;">${((trueCount / TOTAL_RECORDS) * 100).toFixed(1)}%</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">Percentage of true values</div>
                             </div>
                             
-                            <!-- Total Records Card -->
+                            <!-- False Values Card -->
                             <div class="overview-card overview-card--grey">
                                 <div class="overview-card__header">
-                                    <span class="overview-card__title">Total Records</span>
+                                    <span class="overview-card__title">False Values</span>
                                 </div>
-                                <div class="overview-card__value" style="font-weight: 400;">${formatNumber(totalRecords)}</div>
-                                <div class="overview-card__subtitle" style="font-weight: 400;">Number of records</div>
+                                <div class="overview-card__value" style="font-weight: 400;">${((falseCount / TOTAL_RECORDS) * 100).toFixed(1)}%</div>
+                                <div class="overview-card__subtitle" style="font-weight: 400;">Percentage of false values</div>
                             </div>
 
                             <!-- Missing Values Card -->
@@ -1530,20 +1560,21 @@
                                 <div class="overview-card__header">
                                     <span class="overview-card__title">Missing Values</span>
                                 </div>
-                                <div class="overview-card__value" style="font-weight: 400;">${formatNumber(nullCount)} (${((nullCount / totalRecords) * 100).toFixed(1)}%)</div>
+                                <div class="overview-card__value" style="font-weight: 400;">${formatNumber(nullCount)} (${((nullCount / TOTAL_RECORDS) * 100).toFixed(1)}%)</div>
                                 <div class="overview-card__subtitle" style="font-weight: 400;">Count and percentage of nulls</div>
                             </div>
-
+ 
                             <!-- Valid Data Card -->
                             <div class="overview-card overview-card--grey">
                                 <div class="overview-card__header">
                                     <span class="overview-card__title">Valid Data</span>
                                 </div>
-                                <div class="overview-card__value" style="font-weight: 400;">${((1 - nullCount / totalRecords) * 100).toFixed(1)}%</div>
+                                <div class="overview-card__value" style="font-weight: 400;">${((1 - nullCount / TOTAL_RECORDS) * 100).toFixed(1)}%</div>
                                 <div class="overview-card__subtitle" style="font-weight: 400;">Percentage of non-null values</div>
                             </div>
-                            ` : `
-                            <!-- Regular Distinct Count Card -->
+                        </div>` : `
+                        <div class="grid grid-cols-2" style="gap: var(--space-4)">
+                            <!-- Distinct Count Card -->
                             <div class="overview-card overview-card--grey">
                                 <div class="overview-card__header">
                                     <span class="overview-card__title">Distinct Count</span>
@@ -1552,7 +1583,7 @@
                                 <div class="overview-card__subtitle" style="font-weight: 400;">Unique values in column</div>
                             </div>
                             
-                            <!-- Regular Uniqueness Card -->
+                            <!-- Uniqueness Card -->
                             <div class="overview-card overview-card--grey">
                                 <div class="overview-card__header">
                                     <span class="overview-card__title">Uniqueness</span>
@@ -1560,11 +1591,10 @@
                                 <div class="overview-card__value" style="font-weight: 400;">${uniquenessPercentage}%</div>
                                 <div class="overview-card__subtitle" style="font-weight: 400;">Percentage of unique values</div>
                             </div>
-                            `}
-                        </div>
+                        </div>`}
                         
-                        <!-- Value Distribution section -->
-                        <div style="margin-top: var(--space-2);">
+                        <!-- Value Distribution section with chart -->
+                        <div style="margin-top: var(--space-4);">
                             <h3 class="body-text-medium" style="margin-bottom: var(--space-3); color: var(--neutral-grey-800);">
                                 ${isBooleanType ? 'Value Distribution' : 'Top 5 Values'}
                             </h3>
@@ -1631,7 +1661,7 @@
                                     tooltip: {
                                         callbacks: {
                                             label: function(context) {
-                                                const percentage = ((context.raw / totalRecords) * 100).toFixed(1);
+                                                const percentage = ((context.raw / TOTAL_RECORDS) * 100).toFixed(1);
                                                 return `${formatNumber(context.raw)} records (${percentage}%)`;
                                             }
                                         }
@@ -1906,11 +1936,7 @@
                 columnTitleElement.textContent = 'Table Overview';
             }
             
-            // Remove the warning banner when viewing table overview
-            const bannerElement = document.querySelector('.banner');
-            if (bannerElement) {
-                bannerElement.style.display = 'none';
-            }
+            // Banner reference removed
             
             // Create and display overview cards
             const rightPanel = document.querySelector('.content-layout > div:last-child');
