@@ -958,10 +958,10 @@
                         <!-- Total Records Card - Full Width -->
                         <div class="overview-card overview-card--grey">
                             <div class="overview-card__header">
-                                <span class="overview-card__title">Total Records</span>
+                                <span class="overview-card__title">Total Records in Table</span>
                             </div>
                             <div class="overview-card__value" style="font-size: 32px; line-height: 40px; font-weight: 400;">${formatNumber(totalCells)}</div>
-                            <div class="overview-card__subtitle" style="font-weight: 400;">${formatNumber(TOTAL_RECORDS)} rows × ${columnCount} columns</div>
+                            <div class="overview-card__subtitle" style="font-weight: 400;">Across ${columnCount} columns</div>
                         </div>
                         
                         <div class="grid grid-cols-2" style="gap: var(--space-4)">
@@ -1388,7 +1388,7 @@
                     <!-- Total Records Card - Full Width -->
                     <div class="overview-card overview-card--grey">
                         <div class="overview-card__header">
-                            <span class="overview-card__title">Valid Values</span>
+                            <span class="overview-card__title">Total Records</span>
                         </div>
                         <div class="overview-card__value" style="font-size: 32px; line-height: 40px; font-weight: 400;">${formatNumber(data.properties.recordCount)}</div>
                         <div class="overview-card__subtitle" style="font-weight: 400;">Number of non-null values</div>
@@ -1420,10 +1420,10 @@
                     <!-- Total Records Card - Full Width -->
                     <div class="overview-card overview-card--grey">
                         <div class="overview-card__header">
-                            <span class="overview-card__title">Valid Values</span>
+                            <span class="overview-card__title">Total Records in Column</span>
                         </div>
                         <div class="overview-card__value" style="font-size: 32px; line-height: 40px; font-weight: 400;">${formatNumber(data.properties.recordCount)}</div>
-                        <div class="overview-card__subtitle" style="font-weight: 400;">Number of non-null values</div>
+                        <div class="overview-card__subtitle" style="font-weight: 400;">Number of all records</div>
                     </div>
                     
                     <div class="grid grid-cols-2" style="gap: var(--space-4)">
